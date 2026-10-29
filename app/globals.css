@@ -1,0 +1,108 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/*
+  BRAND TOKENS - edit colours here only.
+  Palette: "Cobalt + Gold" (option 09), with the warm cream and lavender from the opening picture.
+  Swap in the "Graphite Governance" palette (option 17) by changing the values below:
+  navy #1c1e22, panel #26282e, gold #d9ab3f, ice #a47fe3.
+*/
+:root {
+  --navy: #0b1e4d; /* primary, dark sections, headings */
+  --panel: #13296a; /* cards on dark sections */
+  --gold: #ffc857; /* accent, buttons on dark (dark text) */
+  --ice: #8ec5ff; /* links and labels on dark */
+  --lavender: #a47fe3; /* small highlights, from the opening picture */
+  --ink: #111827; /* body text */
+  --cream: #f1ede6; /* page background */
+  --muted: #5b6478; /* secondary text */
+  --line: #d9d4ca; /* borders on cream */
+
+  /* shadcn semantic tokens, mapped to the brand */
+  --background: var(--cream);
+  --foreground: var(--ink);
+  --primary: var(--navy);
+  --primary-foreground: #ffffff;
+  --secondary: #e7e2d8;
+  --secondary-foreground: var(--navy);
+  --muted-foreground: var(--muted);
+  --accent: #e7e2d8;
+  --accent-foreground: var(--navy);
+  --popover: var(--cream);
+  --popover-foreground: var(--ink);
+  --border: var(--line);
+  --input: var(--line);
+  --ring: var(--navy);
+  --destructive: #b42318;
+  --radius: 0.75rem;
+}
+
+@theme inline {
+  --color-navy: var(--navy);
+  --color-panel: var(--panel);
+  --color-gold: var(--gold);
+  --color-ice: var(--ice);
+  --color-lavender: var(--lavender);
+  --color-ink: var(--ink);
+  --color-cream: var(--cream);
+  --color-line: var(--line);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--secondary);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-destructive: var(--destructive);
+
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-space-grotesk);
+  --font-mono: var(--font-jetbrains-mono);
+  --font-serif: var(--font-lora);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-heading text-navy;
+  }
+  /* sticky header is h-16; keep section titles clear of it */
+  section[id] {
+    scroll-margin-top: 4rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}
