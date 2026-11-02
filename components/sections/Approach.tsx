@@ -127,7 +127,7 @@ export function Approach() {
           </div>
         </div>
 
-        <div className="rounded-lg border border-white/10 bg-panel/80 p-5 shadow-[0_24px_70px_rgb(3_8_28/0.28)] backdrop-blur">
+        <div className="ambient-glow rounded-lg border border-white/10 bg-panel/80 p-5 shadow-[0_24px_70px_rgb(3_8_28/0.28)] backdrop-blur">
           <div className="flex items-center gap-3">
             <span className="inline-flex size-11 items-center justify-center rounded-md bg-gold text-primary-foreground">
               <ActiveIcon className="size-5" strokeWidth={2} aria-hidden />
@@ -140,7 +140,7 @@ export function Approach() {
             </div>
           </div>
 
-          <div className="mt-6 flex min-h-64 items-center rounded-lg bg-cream/70 p-5 shadow-[inset_0_1px_0_rgb(255_255_255/0.05)]">
+          <div className="ambient-sheen mt-6 flex min-h-64 items-center rounded-lg bg-cream/70 p-5 shadow-[inset_0_1px_0_rgb(255_255_255/0.05)]">
             <Diagram active={active} />
           </div>
           <p className="mt-5 text-sm leading-7 text-muted-foreground">{current.body}</p>

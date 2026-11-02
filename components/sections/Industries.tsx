@@ -68,7 +68,7 @@ export function Industries() {
           </div>
         </div>
 
-        <div className="relative overflow-hidden rounded-lg border border-white/10 bg-panel/80 p-6 shadow-[0_24px_70px_rgb(3_8_28/0.28)] backdrop-blur sm:p-8">
+        <div className="ambient-glow relative overflow-hidden rounded-lg border border-white/10 bg-panel/80 p-6 shadow-[0_24px_70px_rgb(3_8_28/0.28)] backdrop-blur sm:p-8">
           <div className="absolute right-[-5rem] top-[-5rem] size-56 rounded-full bg-[#6ee7b7]/12 blur-3xl" aria-hidden />
           <div className="relative">
             <div className="flex items-center justify-between gap-4">
@@ -85,7 +85,7 @@ export function Industries() {
 
             <div className="mt-8 grid gap-3 sm:grid-cols-3">
               {["Signals", "Systems", "Outcomes"].map((label, i) => (
-                <div key={label} className="rounded-md border border-white/10 bg-white/[0.045] p-3">
+                <div key={label} className="ambient-float rounded-md border border-white/10 bg-white/[0.045] p-3">
                   <p className="font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-muted-foreground">
                     0{i + 1}
                   </p>

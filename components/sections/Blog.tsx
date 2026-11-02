@@ -11,7 +11,7 @@ export function Blog() {
           <Eyebrow>{blog.eyebrow}</Eyebrow>
           <h2 className="mt-4 max-w-2xl text-3xl font-bold tracking-tight sm:text-5xl">{blog.title}</h2>
           <p className="mt-5 max-w-xl text-base leading-8 text-muted-foreground">{blog.lead}</p>
-          <div className="mt-8 rounded-lg border border-dashed border-ice/35 bg-white/[0.035] p-4">
+          <div className="ambient-sheen mt-8 rounded-lg border border-dashed border-ice/35 bg-white/[0.035] p-4">
             <p className="font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-ice">Content guide</p>
             <p className="mt-3 text-sm leading-7 text-muted-foreground">
               Prepare 1 featured article and 3 supporting posts. Each post needs a category, title, 2-3 line summary,
@@ -23,7 +23,7 @@ export function Blog() {
         <div className="grid gap-4">
           <Link
             href="/prototype/blog-featured"
-            className="block rounded-lg border border-white/10 bg-panel/80 p-6 shadow-[0_24px_70px_rgb(3_8_28/0.26)] transition-[border-color,scale] duration-150 hover:border-ice/45 active:scale-[0.96] sm:p-8"
+            className="ambient-glow block rounded-lg border border-white/10 bg-panel/80 p-6 shadow-[0_24px_70px_rgb(3_8_28/0.26)] transition-[border-color,scale] duration-150 hover:border-ice/45 active:scale-[0.96] sm:p-8"
           >
             <div className="flex items-center justify-between gap-4">
               <span className="inline-flex items-center gap-2 rounded-full bg-ice/12 px-3 py-1 text-xs font-semibold text-ice">
@@ -44,7 +44,7 @@ export function Blog() {
               <Link
                 key={item.title}
                 href="/prototype/blog-supporting"
-                className="rounded-lg border border-white/10 bg-white/[0.04] p-5 transition-[border-color,scale] duration-150 hover:border-ice/45 active:scale-[0.96]"
+                className="ambient-float rounded-lg border border-white/10 bg-white/[0.04] p-5 transition-[border-color,scale] duration-150 hover:border-ice/45 active:scale-[0.96]"
               >
                 <div className="flex items-center justify-between gap-3">
                   <p className="font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-ice">{item.category}</p>
