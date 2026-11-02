@@ -1,22 +1,31 @@
 import { Eyebrow, Section } from "@/components/site/Section";
+import { IndustryExplorer } from "@/components/sections/IndustryExplorer";
 import { industries } from "@/lib/content";
+import { ArrowUpRightIcon } from "lucide-react";
+import Link from "next/link";
 
 export function Industries() {
   return (
     <Section id="industries">
-      <Eyebrow>{industries.eyebrow}</Eyebrow>
-      <h2 className="mt-4 max-w-3xl text-3xl font-bold tracking-tight sm:text-5xl">{industries.title}</h2>
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.65fr)] lg:items-end lg:gap-12">
+        <div>
+          <Eyebrow>{industries.eyebrow}</Eyebrow>
+          <h2 className="mt-5 max-w-4xl text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
+            <span className="block">{industries.titleLines[0]}</span>
+            <span className="mt-2 inline-block bg-lavender px-2 pb-1 text-graphite">{industries.titleLines[1]}</span>
+          </h2>
+        </div>
+        <p className="max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">{industries.description}</p>
+      </div>
 
-      <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {industries.items.map(({ title, body }) => (
-          <li key={title} className="rounded-2xl border border-line bg-white p-6 transition-shadow hover:shadow-md">
-            <h3 className="text-lg font-bold">{title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{body}</p>
-          </li>
-        ))}
-      </ul>
+      <IndustryExplorer />
 
-      <p className="mt-10 font-serif text-xl italic text-navy sm:text-2xl">{industries.beyond}</p>
+      <div className="mt-8 flex flex-col gap-5 border border-line bg-panel p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+        <p className="max-w-2xl font-heading text-xl font-semibold text-mist sm:text-2xl">{industries.beyond}</p>
+        <Link href="/#contact" className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-lg bg-lavender px-5 text-sm font-semibold text-graphite transition-colors hover:bg-lavender/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lavender">
+          Let&apos;s talk <ArrowUpRightIcon className="size-4" aria-hidden="true" />
+        </Link>
+      </div>
     </Section>
   );
 }

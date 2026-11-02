@@ -1,50 +1,43 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-/*
-  BRAND TOKENS - edit colours here only.
-  Palette: "Cobalt + Gold" (option 09), with the warm cream and lavender from the opening picture.
-  Swap in the "Graphite Governance" palette (option 17) by changing the values below:
-  navy #1c1e22, panel #26282e, gold #d9ab3f, ice #a47fe3.
-*/
 :root {
-  --navy: #0b1e4d; /* primary, dark sections, headings */
-  --panel: #13296a; /* cards on dark sections */
-  --gold: #ffc857; /* accent, buttons on dark (dark text) */
-  --ice: #8ec5ff; /* links and labels on dark */
-  --lavender: #a47fe3; /* small highlights, from the opening picture */
-  --ink: #111827; /* body text */
-  --cream: #f1ede6; /* page background */
-  --muted: #5b6478; /* secondary text */
-  --line: #d9d4ca; /* borders on cream */
+  /* Graphite Governance palette */
+  color-scheme: dark;
+  --graphite: #1c1e22;
+  --panel: #26282e;
+  --elevated: #303239;
+  --mist: #eceef0;
+  --lavender: #a47fe3;
+  --gold: #d9ab3f;
+  --muted: #b9bec8;
+  --line: #454850;
 
-  /* shadcn semantic tokens, mapped to the brand */
-  --background: var(--cream);
-  --foreground: var(--ink);
-  --primary: var(--navy);
-  --primary-foreground: #ffffff;
-  --secondary: #e7e2d8;
-  --secondary-foreground: var(--navy);
+  --background: var(--graphite);
+  --foreground: var(--mist);
+  --primary: var(--lavender);
+  --primary-foreground: var(--graphite);
+  --secondary: var(--panel);
+  --secondary-foreground: var(--mist);
   --muted-foreground: var(--muted);
-  --accent: #e7e2d8;
-  --accent-foreground: var(--navy);
-  --popover: var(--cream);
-  --popover-foreground: var(--ink);
+  --accent: var(--elevated);
+  --accent-foreground: var(--mist);
+  --popover: var(--panel);
+  --popover-foreground: var(--mist);
   --border: var(--line);
   --input: var(--line);
-  --ring: var(--navy);
+  --ring: var(--lavender);
   --destructive: #b42318;
   --radius: 0.75rem;
 }
 
 @theme inline {
-  --color-navy: var(--navy);
+  --color-graphite: var(--graphite);
   --color-panel: var(--panel);
+  --color-elevated: var(--elevated);
+  --color-mist: var(--mist);
   --color-gold: var(--gold);
-  --color-ice: var(--ice);
   --color-lavender: var(--lavender);
-  --color-ink: var(--ink);
-  --color-cream: var(--cream);
   --color-line: var(--line);
 
   --color-background: var(--background);
@@ -90,7 +83,7 @@
   h1,
   h2,
   h3 {
-    @apply font-heading text-navy;
+    @apply font-heading text-mist;
   }
   /* sticky header is h-16; keep section titles clear of it */
   section[id] {
@@ -98,7 +91,32 @@
   }
 }
 
+@keyframes hero-glow-drift {
+  from {
+    opacity: 0.65;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(24px, -18px, 0) scale(1.06);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-background-glow,
+  .hero-panel-glow {
+    animation: hero-glow-drift 16s ease-in-out infinite alternate;
+  }
+  .hero-background-glow-offset {
+    animation-delay: -8s;
+    animation-duration: 20s;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .hero-signal-dot {
+    display: none;
+  }
   html {
     scroll-behavior: auto;
   }

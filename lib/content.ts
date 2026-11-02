@@ -8,15 +8,6 @@ export const site = {
   email: "hello@ardbergai.com",
 };
 
-export const nav = [
-  { id: "about", label: "About" },
-  { id: "intro", label: "ardbergai" },
-  { id: "approach", label: "Approach" },
-  { id: "offer", label: "What we offer" },
-  { id: "industries", label: "Industries" },
-  { id: "contact", label: "Contact" },
-];
-
 export const about = {
   // TODO: placeholder copy
   title: "Every industry runs on complexity.",
@@ -83,22 +74,26 @@ export const offer = {
   ],
 };
 
+const industryTitleLines = ["Specific challenges.", "Connected solutions."] as const;
+
 export const industries = {
   eyebrow: "Industries",
-  title: "Deep capability, across industries.",
-  // TODO: placeholder copy
+  title: industryTitleLines.join(" "),
+  titleLines: industryTitleLines,
+  description: "Every industry has its own data, workflows, and decisions. We bring the right engineering to each.",
+  // TODO: validate industry-specific examples against real client work
   items: [
-    { title: "Pharmaceuticals", body: "Research acceleration, predictive analytics, operational efficiency" },
-    { title: "Advanced Manufacturing", body: "Production intelligence, quality automation, smart processes" },
-    { title: "Financial Services", body: "Risk modeling, fraud detection, customer analytics, compliance" },
-    { title: "Energy & Utilities", body: "Demand forecasting, grid optimization, predictive maintenance" },
-    { title: "Healthcare", body: "Diagnostics, personalized care, workflow automation" },
-    { title: "Retail & Consumer Goods", body: "Inventory optimization, customer insights, recommendation systems" },
-    { title: "Logistics & Supply Chain", body: "Route optimization, demand forecasting, autonomous operations" },
-    { title: "Telecommunications", body: "Network performance, predictive maintenance, customer experience" },
-    { title: "Automotive & Mobility", body: "Connected vehicle analytics, autonomy, smart manufacturing" },
+    { title: "Pharmaceuticals", body: "Connect fragmented research data and workflows so teams can move from evidence to better decisions.", signals: ["Research data", "Documents", "Workflows"] },
+    { title: "Advanced Manufacturing", body: "Bring production and quality data together to spot issues earlier and improve processes.", signals: ["Production", "Quality", "Assets"] },
+    { title: "Financial Services", body: "Connect risk and transaction signals to support faster, more consistent reviews.", signals: ["Transactions", "Risk", "Compliance"] },
+    { title: "Energy & Utilities", body: "Use operational data to forecast demand and plan maintenance with greater confidence.", signals: ["Demand", "Grid", "Maintenance"] },
+    { title: "Healthcare", body: "Bring clinical and operational information into clearer, more useful workflows.", signals: ["Clinical data", "Operations", "Care"] },
+    { title: "Retail & Consumer Goods", body: "Turn demand and customer signals into better inventory and experience decisions.", signals: ["Inventory", "Customers", "Demand"] },
+    { title: "Logistics & Supply Chain", body: "Connect routing, demand, and operations data to keep goods moving.", signals: ["Routing", "Demand", "Operations"] },
+    { title: "Telecommunications", body: "Use network signals to identify issues and improve service reliability.", signals: ["Networks", "Operations", "Experience"] },
+    { title: "Automotive & Mobility", body: "Link vehicle and manufacturing data to inform decisions across the product lifecycle.", signals: ["Vehicle data", "Manufacturing", "Mobility"] },
   ],
-  beyond: "...and beyond. Whatever the challenge, whichever industry.",
+  beyond: "A different industry? Tell us the challenge you're working through.",
 };
 
 export const contact = {
@@ -112,3 +107,62 @@ export const footer = {
   // TODO: placeholder copy
   tagline: "AI & software engineering",
 };
+
+export function industryAnchor(title: string) {
+  return `industry-${title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`;
+}
+
+type NavDestination = {
+  label: string;
+  href: string;
+  description?: string;
+  id?: string;
+};
+
+type NavGroup = {
+  label: string;
+  eyebrow: string;
+  featured?: NavDestination;
+  items: NavDestination[];
+  variant: "wide" | "compact";
+};
+
+export const navGroups: NavGroup[] = [
+  {
+    label: "What we do",
+    eyebrow: "Explore ardbergai",
+    variant: "wide",
+    featured: { label: "Overview", href: "/#about", id: "about", description: about.lead },
+    items: [
+      { label: "Our approach", href: "/#approach", id: "approach", description: approach.title },
+      { label: "What we offer", href: "/#offer", id: "offer", description: offer.title },
+    ],
+  },
+  {
+    label: "Industries",
+    eyebrow: "Where we work",
+    variant: "wide",
+    featured: { label: "All industries", href: "/#industries", id: "industries", description: industries.title },
+    items: industries.items.map(({ title }) => ({
+      label: title,
+      href: `/#${industryAnchor(title)}`,
+      id: industryAnchor(title),
+    })),
+  },
+  {
+    label: "Resources",
+    eyebrow: "Explore",
+    variant: "compact",
+    items: [{ label: "Blogs", href: "/blogs", description: "Articles are coming soon." }],
+  },
+  {
+    label: "Company",
+    eyebrow: "Get to know us",
+    variant: "compact",
+    items: [
+      { label: "About ardbergai", href: "/#intro", id: "intro" },
+      { label: "Careers", href: "/careers" },
+      { label: "Contact", href: "/#contact", id: "contact" },
+    ],
+  },
+];

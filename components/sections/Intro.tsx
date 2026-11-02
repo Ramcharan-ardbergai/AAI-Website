@@ -3,7 +3,7 @@ import { intro } from "@/lib/content";
 
 export function Intro() {
   return (
-    <Section id="intro" className="bg-white">
+    <Section id="intro" className="bg-panel">
       <Eyebrow>{intro.eyebrow}</Eyebrow>
       <h2 className="mt-4 max-w-3xl text-3xl font-bold leading-tight tracking-tight sm:text-5xl">
         {intro.title}

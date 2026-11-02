@@ -1,7 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 40" fill="none" role="img" aria-label="ardbergai monogram">
-  <!-- TODO: placeholder "ab" monogram. Replace with the real logo file. -->
-  <circle cx="14" cy="26" r="9" stroke="#0b1e4d" stroke-width="5"/>
-  <path d="M23 26V6" stroke="#0b1e4d" stroke-width="5" stroke-linecap="round"/>
-  <circle cx="44" cy="26" r="9" stroke="#0b1e4d" stroke-width="5"/>
-  <path d="M35 26V6" stroke="#0b1e4d" stroke-width="5" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 125" fill="none" role="img" aria-label="ardbergai monogram">
+  <path
+    d="M111 10v64c0 20 15 35 35 35s35-15 35-35-15-35-35-35c-14 0-25 7-34 20L88 93c-8 11-19 16-32 16-20 0-35-15-35-35s15-35 35-35c14 0 25 7 34 20l22 31"
+    stroke="#a47fe3"
+    stroke-width="17"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
 </svg>

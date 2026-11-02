@@ -1,0 +1,27 @@
+.hero-ascii-field {
+  color: var(--lavender);
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 10px;
+  line-height: 14px;
+  letter-spacing: 0.04em;
+  white-space: pre;
+  opacity: 0.18;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 18%, black 72%, transparent 100%);
+}
+
+@keyframes asciiDrift {
+  from {
+    opacity: 0.14;
+    transform: translate3d(-12px, -5px, 0);
+  }
+  to {
+    opacity: 0.22;
+    transform: translate3d(24px, 9px, 0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-ascii-field {
+    animation: asciiDrift 20s ease-in-out infinite alternate;
+  }
+}
