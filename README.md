@@ -1,4 +1,4 @@
-# ardbergai website
+# Ardbergai website
 
 Single-page site: Next.js (App Router, TypeScript), Tailwind CSS v4, shadcn/ui (Button, Sheet).
 
