@@ -5,13 +5,25 @@ export const site = {
   domain: "ardbergai.com",
   location: "Hyderabad, India",
   // TODO: replace with the real contact address
-  email: "hello@ardbergai.com",
+  email: "contact@ardbergai.com",
 };
+
+export const nav = [
+  { id: "about", label: "About" },
+  { id: "approach", label: "Approach" },
+  { id: "offer", label: "Services" },
+  { id: "industries", label: "Industries" },
+  { id: "blog", label: "Blog" },
+  { id: "contact", label: "Contact" },
+];
 
 export const about = {
   // TODO: placeholder copy
-  title: "Every industry runs on complexity.",
+  title: "Every industry runs on",
+  accent: "complexity.",
   lead: "We turn it into connected intelligence.",
+  intro:
+    "ArdbergAI builds practical AI products, software platforms, and connected data systems for teams that need real outcomes, not just experiments.",
   scrollLabel: "Scroll down",
   // Copy taken from the opening picture
   columns: [
@@ -21,7 +33,7 @@ export const about = {
       body: "A bigger idea. A real business need.",
     },
     {
-      label: "The engineering",
+      label: "The execution",
       title: "We connect the pieces.",
       body: "The right data. The right models. The right systems. Working together.",
     },
@@ -36,64 +48,105 @@ export const about = {
 export const intro = {
   eyebrow: "Introducing ardbergai",
   // TODO: placeholder copy
-  title: "We started in life sciences, where AI has to be right.",
-  body: "Today, we bring that same care to every industry.",
+  title: "We started in life sciences, where AI has to be right. Today we bring that same care to",
+  accent: "every industry.",
 };
 
 export const approach = {
   eyebrow: "Our approach",
-  // TODO: placeholder copy
-  title: "From cluster to clarity.",
-  // Messy starting points, taken from the website-story picture
-  cluster: ["Spreadsheets", "Legacy ERP", "Siloed data", "PDF archives", "Disconnected tools"],
-  // TODO: placeholder copy
-  steps: [
+  title: "From messy inputs to working intelligence.",
+  // Four stages, after the website-story picture. TODO: placeholder copy
+  stages: [
     {
-      title: "Understand the challenge",
-      body: "We start with your goals and the systems in the way, before anything is built.",
+      title: "The reality",
+      body: "Businesses have ambitious goals, but complex systems and operational challenges stand in their way.",
     },
     {
-      title: "Match the right solution",
-      body: "We identify the opportunity and choose the right models, data and software for it.",
+      title: "The understanding",
+      body: "We understand the challenge, identify the opportunity, and determine the right approach.",
     },
     {
-      title: "Connect it into one intelligence",
-      body: "Everything works together as one system your teams and decisions can rely on.",
+      title: "The build",
+      body: "Plans become practical products, AI workflows, and connected systems your team can actually use.",
     },
+    {
+      title: "The opportunity",
+      body: "Explore relevant capabilities, examine real work, and start a conversation about your own challenges.",
+    },
+  ],
+  // Messy starting points for stage 01
+  cluster: ["Spreadsheets", "Legacy ERP", "Siloed data", "PDF archives"],
+  understandingSteps: ["Understand the challenge", "Identify the opportunity", "Determine the right approach"],
+  layers: ["Interface & experience", "AI capabilities", "Software & integration", "Data foundation"],
+  principlesTitle: "The principles we follow",
+  principles: [
+    { title: "One memorable opening", body: "Rather than continuous animation." },
+    { title: "Short, meaningful content", body: "With deeper information available when visitors want it." },
+    { title: "Proof before promises", body: "Real projects, products, case studies and outcomes wherever available." },
+    { title: "Exploration without confusion", body: "Discover services without a long, forced animated journey." },
+    { title: "Clear contact opportunities", body: "Throughout the experience, never interrupting it." },
   ],
 };
 
 export const offer = {
-  eyebrow: "What we offer",
-  title: "Three ways to work with us.",
+  eyebrow: "Services",
   // TODO: placeholder copy
   items: [
-    { title: "We build platforms.", body: "Purpose-built AI and software platforms, designed around your business." },
-    { title: "We partner with your teams, start to finish.", body: "From the first conversation to a system in production." },
-    { title: "We embed engineers.", body: "Engineers who join your team and carry the load on your projects." },
+    { title: "We build platforms.", body: "AI products and platforms, ready for every industry." },
+    { title: "We partner.", body: "We work alongside your teams to deliver projects and products, start to finish." },
+    { title: "We embed.", body: "Engineers and forward-deployed engineers who carry the load on your projects." },
   ],
 };
 
-const industryTitleLines = ["Specific challenges.", "Connected solutions."] as const;
-
 export const industries = {
   eyebrow: "Industries",
-  title: industryTitleLines.join(" "),
-  titleLines: industryTitleLines,
-  description: "Every industry has its own data, workflows, and decisions. We bring the right engineering to each.",
-  // TODO: validate industry-specific examples against real client work
+  title: "Deep capability, across industries.",
+  // TODO: placeholder copy
   items: [
-    { title: "Pharmaceuticals", body: "Connect fragmented research data and workflows so teams can move from evidence to better decisions.", signals: ["Research data", "Documents", "Workflows"] },
-    { title: "Advanced Manufacturing", body: "Bring production and quality data together to spot issues earlier and improve processes.", signals: ["Production", "Quality", "Assets"] },
-    { title: "Financial Services", body: "Connect risk and transaction signals to support faster, more consistent reviews.", signals: ["Transactions", "Risk", "Compliance"] },
-    { title: "Energy & Utilities", body: "Use operational data to forecast demand and plan maintenance with greater confidence.", signals: ["Demand", "Grid", "Maintenance"] },
-    { title: "Healthcare", body: "Bring clinical and operational information into clearer, more useful workflows.", signals: ["Clinical data", "Operations", "Care"] },
-    { title: "Retail & Consumer Goods", body: "Turn demand and customer signals into better inventory and experience decisions.", signals: ["Inventory", "Customers", "Demand"] },
-    { title: "Logistics & Supply Chain", body: "Connect routing, demand, and operations data to keep goods moving.", signals: ["Routing", "Demand", "Operations"] },
-    { title: "Telecommunications", body: "Use network signals to identify issues and improve service reliability.", signals: ["Networks", "Operations", "Experience"] },
-    { title: "Automotive & Mobility", body: "Link vehicle and manufacturing data to inform decisions across the product lifecycle.", signals: ["Vehicle data", "Manufacturing", "Mobility"] },
+    { title: "Pharmaceuticals", body: "Research acceleration, predictive analytics, operational efficiency" },
+    { title: "Advanced Manufacturing", body: "Production intelligence, quality automation, smart processes" },
+    { title: "Financial Services", body: "Risk modeling, fraud detection, customer analytics, compliance" },
+    { title: "Energy & Utilities", body: "Demand forecasting, grid optimization, predictive maintenance" },
+    { title: "Healthcare", body: "Diagnostics, personalized care, workflow automation" },
+    { title: "Retail & Consumer Goods", body: "Inventory optimization, customer insights, recommendation systems" },
+    { title: "Logistics & Supply Chain", body: "Route optimization, demand forecasting, autonomous operations" },
+    { title: "Telecommunications", body: "Network performance, predictive maintenance, customer experience" },
+    { title: "Automotive & Mobility", body: "Connected vehicle analytics, autonomy, smart manufacturing" },
   ],
-  beyond: "A different industry? Tell us the challenge you're working through.",
+  beyond: "...and beyond. Whatever the challenge, whichever industry.",
+};
+
+export const blog = {
+  eyebrow: "Blog",
+  title: "Ideas, lessons, and practical AI notes.",
+  lead: "A place for short, useful writing that shows how ArdbergAI thinks about real business problems, AI implementation, and connected systems.",
+  featured: {
+    category: "AI implementation",
+    readTime: "5 min read",
+    title: "What makes an AI project useful after the demo?",
+    summary:
+      "Use this featured post for the strongest article: a practical point of view, real lesson, or industry story that explains how ArdbergAI turns prototypes into working systems.",
+  },
+  items: [
+    {
+      category: "Data strategy",
+      readTime: "4 min",
+      title: "From scattered data to usable intelligence",
+      summary: "Ideal length: 2-3 short lines explaining the problem, insight, and business outcome.",
+    },
+    {
+      category: "Industry insight",
+      readTime: "3 min",
+      title: "Where AI creates value in complex operations",
+      summary: "Use this slot for pharma, manufacturing, finance, healthcare, or another priority industry.",
+    },
+    {
+      category: "Engineering notes",
+      readTime: "6 min",
+      title: "Building AI products that teams can trust",
+      summary: "Use this slot for technical credibility: validation, workflows, integrations, and reliability.",
+    },
+  ],
 };
 
 export const contact = {
@@ -107,62 +160,3 @@ export const footer = {
   // TODO: placeholder copy
   tagline: "AI & software engineering",
 };
-
-export function industryAnchor(title: string) {
-  return `industry-${title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`;
-}
-
-type NavDestination = {
-  label: string;
-  href: string;
-  description?: string;
-  id?: string;
-};
-
-type NavGroup = {
-  label: string;
-  eyebrow: string;
-  featured?: NavDestination;
-  items: NavDestination[];
-  variant: "wide" | "compact";
-};
-
-export const navGroups: NavGroup[] = [
-  {
-    label: "What we do",
-    eyebrow: "Explore ardbergai",
-    variant: "wide",
-    featured: { label: "Overview", href: "/#about", id: "about", description: about.lead },
-    items: [
-      { label: "Our approach", href: "/#approach", id: "approach", description: approach.title },
-      { label: "What we offer", href: "/#offer", id: "offer", description: offer.title },
-    ],
-  },
-  {
-    label: "Industries",
-    eyebrow: "Where we work",
-    variant: "wide",
-    featured: { label: "All industries", href: "/#industries", id: "industries", description: industries.title },
-    items: industries.items.map(({ title }) => ({
-      label: title,
-      href: `/#${industryAnchor(title)}`,
-      id: industryAnchor(title),
-    })),
-  },
-  {
-    label: "Resources",
-    eyebrow: "Explore",
-    variant: "compact",
-    items: [{ label: "Blogs", href: "/blogs", description: "Articles are coming soon." }],
-  },
-  {
-    label: "Company",
-    eyebrow: "Get to know us",
-    variant: "compact",
-    items: [
-      { label: "About ardbergai", href: "/#intro", id: "intro" },
-      { label: "Careers", href: "/careers" },
-      { label: "Contact", href: "/#contact", id: "contact" },
-    ],
-  },
-];
