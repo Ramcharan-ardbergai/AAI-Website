@@ -3,18 +3,14 @@ import { Container } from "./Container";
 
 type SectionProps = React.ComponentProps<"section"> & {
   id: string;
-  /** dark = navy background with light text */
+  /** Raised graphite section with light text. */
   tone?: "light" | "dark";
 };
 
 export function Section({ tone = "light", className, children, ...props }: SectionProps) {
   return (
     <section
-      className={cn(
-        "relative flex min-h-[calc(100svh-3.5rem)] items-center overflow-hidden py-20 sm:py-28",
-        tone === "dark" && "bg-navy text-white",
-        className,
-      )}
+      className={cn("py-20 sm:py-28", tone === "dark" && "bg-panel text-mist", className)}
       {...props}
     >
       <Container>{children}</Container>
@@ -26,7 +22,7 @@ export function Section({ tone = "light", className, children, ...props }: Secti
 export function Eyebrow({ className, ...props }: React.ComponentProps<"p">) {
   return (
     <p
-      className={cn("font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground", className)}
+      className={cn("font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-gold", className)}
       {...props}
     />
   );
