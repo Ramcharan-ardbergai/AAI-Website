@@ -57,6 +57,12 @@ export function Header() {
               {label}
             </a>
           ))}
+          <a
+            href="/version-2"
+            className="rounded-full px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors duration-150 hover:bg-white/[0.06] hover:text-ink focus-visible:outline-2 focus-visible:outline-gold xl:px-3"
+          >
+            Version 2
+          </a>
         </nav>
 
         <Sheet>
@@ -77,6 +83,12 @@ export function Header() {
                   {label}
                 </SheetClose>
               ))}
+              <SheetClose
+                render={<a href="/version-2" />}
+                className="rounded-md px-3 py-3 text-base text-ink hover:bg-secondary focus-visible:outline-2 focus-visible:outline-gold"
+              >
+                Version 2
+              </SheetClose>
             </nav>
           </SheetContent>
         </Sheet>

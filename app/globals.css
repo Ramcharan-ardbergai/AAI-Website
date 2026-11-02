@@ -34,8 +34,12 @@
 
 @theme inline {
   --color-navy: var(--navy);
+  --color-graphite: var(--graphite);
   --color-panel: var(--panel);
+  --color-elevated: var(--elevated);
+  --color-mist: var(--mist);
   --color-gold: var(--gold);
+  --color-lavender: var(--lavender);
   --color-ice: var(--ice);
   --color-sky: var(--sky);
   --color-ink: var(--ink);
@@ -69,6 +73,33 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) * 1.4);
   --radius-2xl: calc(var(--radius) * 1.8);
+}
+
+.version2-theme {
+  color-scheme: dark;
+  --graphite: #1c1e22;
+  --panel: #26282e;
+  --elevated: #303239;
+  --mist: #eceef0;
+  --lavender: #a47fe3;
+  --gold: #d9ab3f;
+  --muted: #b9bec8;
+  --line: #454850;
+  --background: var(--graphite);
+  --foreground: var(--mist);
+  --primary: var(--lavender);
+  --primary-foreground: var(--graphite);
+  --secondary: var(--panel);
+  --secondary-foreground: var(--mist);
+  --muted-foreground: var(--muted);
+  --accent: var(--elevated);
+  --accent-foreground: var(--mist);
+  --popover: var(--panel);
+  --popover-foreground: var(--mist);
+  --border: var(--line);
+  --input: var(--line);
+  --ring: var(--lavender);
+  --destructive: #b42318;
 }
 
 @layer base {
