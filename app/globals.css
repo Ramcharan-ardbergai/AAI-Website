@@ -1,39 +1,34 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-/*
-  BRAND TOKENS - edit colours here only.
-  Palette: "Cobalt + Gold" (option 09), with the warm cream and lavender from the opening picture.
-  Swap in the "Graphite Governance" palette (option 17) by changing the values below:
-  navy #1c1e22, panel #26282e, gold #d9ab3f, ice #a47fe3.
-*/
+/* BRAND TOKENS - edit colours here only. Palette: "Cobalt + Gold" (dark). */
 :root {
-  --navy: #0b1e4d; /* primary, dark sections, headings */
-  --panel: #13296a; /* cards on dark sections */
-  --gold: #ffc857; /* accent, buttons on dark (dark text) */
-  --ice: #8ec5ff; /* links and labels on dark */
-  --lavender: #a47fe3; /* small highlights, from the opening picture */
-  --ink: #111827; /* body text */
-  --cream: #f1ede6; /* page background */
-  --muted: #5b6478; /* secondary text */
-  --line: #d9d4ca; /* borders on cream */
+  --navy: #081538; /* deepest tone: closing section, principles bar, badges */
+  --panel: #13296a; /* cards */
+  --gold: #ffc857; /* accent, buttons (dark text) */
+  --ice: #8ec5ff; /* labels and links */
+  --sky: #4f7fc4; /* soft blue shapes */
+  --ink: #eaf0ff; /* text and headings (light, on dark) */
+  --cream: #0b1e4d; /* page background (Cobalt Night) */
+  --muted: #a9b8da; /* secondary text */
+  --line: #27407f; /* borders */
 
   /* shadcn semantic tokens, mapped to the brand */
   --background: var(--cream);
   --foreground: var(--ink);
-  --primary: var(--navy);
-  --primary-foreground: #ffffff;
-  --secondary: #e7e2d8;
-  --secondary-foreground: var(--navy);
+  --primary: var(--gold);
+  --primary-foreground: #0b1e4d;
+  --secondary: var(--panel);
+  --secondary-foreground: var(--ink);
   --muted-foreground: var(--muted);
-  --accent: #e7e2d8;
-  --accent-foreground: var(--navy);
-  --popover: var(--cream);
+  --accent: var(--panel);
+  --accent-foreground: var(--ink);
+  --popover: #0f2559;
   --popover-foreground: var(--ink);
   --border: var(--line);
   --input: var(--line);
-  --ring: var(--navy);
-  --destructive: #b42318;
+  --ring: var(--ice);
+  --destructive: #f87171;
   --radius: 0.75rem;
 }
 
@@ -42,7 +37,7 @@
   --color-panel: var(--panel);
   --color-gold: var(--gold);
   --color-ice: var(--ice);
-  --color-lavender: var(--lavender);
+  --color-sky: var(--sky);
   --color-ink: var(--ink);
   --color-cream: var(--cream);
   --color-line: var(--line);
@@ -86,11 +81,25 @@
   }
   body {
     @apply bg-background text-foreground antialiased;
+    background:
+      radial-gradient(circle at 16% 8%, rgb(142 197 255 / 0.22), transparent 28rem),
+      radial-gradient(circle at 86% 18%, rgb(79 127 196 / 0.16), transparent 24rem),
+      linear-gradient(135deg, rgb(255 255 255 / 0.055) 0 1px, transparent 1px 36px),
+      linear-gradient(90deg, #07112e 0%, #0b1e4d 44%, #081538 100%);
+    background-attachment: fixed;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(circle at 50% 110%, rgb(79 127 196 / 0.2), transparent 36rem);
   }
   h1,
   h2,
   h3 {
-    @apply font-heading text-navy;
+    @apply font-heading text-ink;
   }
   /* sticky header is h-16; keep section titles clear of it */
   section[id] {

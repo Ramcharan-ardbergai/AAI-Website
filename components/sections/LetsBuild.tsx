@@ -11,7 +11,7 @@ export function LetsBuild() {
       <Button
         render={<a href={`mailto:${site.email}`} />}
         nativeButton={false}
-        className="mt-8 h-12 gap-2 rounded-lg bg-gold px-6 text-base font-semibold text-navy hover:bg-gold/90"
+        className="mt-8 h-12 gap-2 rounded-lg bg-gold px-6 text-base font-semibold text-[#0b1e4d] hover:bg-gold/90"
       >
         {contact.cta}
         <ArrowRightIcon />

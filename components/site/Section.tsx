@@ -10,7 +10,11 @@ type SectionProps = React.ComponentProps<"section"> & {
 export function Section({ tone = "light", className, children, ...props }: SectionProps) {
   return (
     <section
-      className={cn("py-20 sm:py-28", tone === "dark" && "bg-navy text-white", className)}
+      className={cn(
+        "relative flex min-h-[calc(100svh-3.5rem)] items-center overflow-hidden py-20 sm:py-28",
+        tone === "dark" && "bg-navy text-white",
+        className,
+      )}
       {...props}
     >
       <Container>{children}</Container>
