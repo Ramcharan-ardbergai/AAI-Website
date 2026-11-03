@@ -1,31 +1,6 @@
 import { Eyebrow, Section } from "@/components/version2/site/Section";
+import { ClusterToClarity } from "@/components/version2/sections/ClusterToClarity";
 import { approach } from "@/lib/version2-content";
-
-/* Cluster (tangled lines + messy sources) resolving into one clear line. */
-function ClusterToClarity() {
-  return (
-    <div className="rounded-2xl border border-line bg-panel p-5 sm:p-8" aria-hidden>
-      <div className="flex flex-wrap gap-2">
-        {approach.cluster.map((label) => (
-          <span key={label} className="rounded-md border border-line bg-elevated px-2.5 py-1 text-xs text-muted-foreground">
-            {label}
-          </span>
-        ))}
-      </div>
-      <svg viewBox="0 0 600 90" className="mt-4 h-auto w-full" fill="none">
-        <path
-          d="M0 45 C40 0 70 90 110 20 S170 80 200 45 S250 10 280 45"
-          stroke="var(--lavender)"
-          strokeWidth="2"
-        />
-        <path d="M0 60 C50 90 80 0 120 70 S180 10 215 55 S255 80 280 45" stroke="var(--mist)" strokeWidth="2" opacity=".5" />
-        <path d="M0 30 C30 70 90 40 130 60 S190 0 220 40 S260 60 280 45" stroke="var(--gold)" strokeWidth="2" opacity=".7" />
-        <path d="M280 45 H560" stroke="var(--lavender)" strokeWidth="3" />
-        <circle cx="570" cy="45" r="9" fill="var(--gold)" stroke="var(--lavender)" strokeWidth="3" />
-      </svg>
-    </div>
-  );
-}
 
 export function Approach() {
   return (

@@ -1,5 +1,5 @@
 import { ArrowDownIcon, ArrowUpRightIcon } from "lucide-react";
-import { Container } from "@/components/site/Container";
+import { Container } from "@/components/version2/site/Container";
 import { about, contact } from "@/lib/version2-content";
 import "./About.css";
 
@@ -21,12 +21,13 @@ const asciiField = Array.from({ length: 48 }, (_, row) =>
 function HeroArtwork() {
   return (
     <div
-      className="relative h-[360px] overflow-hidden rounded-[2rem] border border-line bg-panel shadow-[0_30px_90px_-55px_rgba(164,127,227,.5)] sm:h-[440px] xl:h-[480px]"
+      className="relative h-[360px] overflow-hidden rounded-[2rem] border border-line bg-panel sm:h-[440px] xl:h-[480px]"
+      style={{ boxShadow: "0 30px 90px -55px color-mix(in srgb, var(--lavender) 50%, transparent)" }}
       aria-hidden="true"
     >
       <div
         className="absolute inset-0 opacity-50"
-        style={{ backgroundImage: "linear-gradient(to right, rgba(236,238,240,.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(236,238,240,.06) 1px, transparent 1px)", backgroundSize: "28px 28px" }}
+        style={{ backgroundImage: "linear-gradient(to right, color-mix(in srgb, var(--mist) 6%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in srgb, var(--mist) 6%, transparent) 1px, transparent 1px)", backgroundSize: "28px 28px" }}
       />
       <div className="hero-panel-glow absolute -right-24 top-12 size-80 rounded-full bg-lavender/15 blur-3xl" />
       <div className="absolute left-6 top-6 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-gold sm:left-8 sm:top-8">
@@ -63,7 +64,7 @@ function HeroArtwork() {
         </div>
       ))}
 
-      <div className="absolute right-[5%] top-1/2 flex aspect-square w-[42%] -translate-y-1/2 flex-col items-center justify-center rounded-full border border-lavender/60 bg-graphite text-center shadow-[0_0_80px_-20px_rgba(164,127,227,.55)]">
+      <div className="absolute right-[5%] top-1/2 flex aspect-square w-[42%] -translate-y-1/2 flex-col items-center justify-center rounded-full border border-lavender/60 bg-graphite text-center" style={{ boxShadow: "0 0 80px -20px color-mix(in srgb, var(--lavender) 55%, transparent)" }}>
         <div className="absolute inset-3 rounded-full border border-dashed border-lavender/30" />
         <span className="relative font-mono text-[8px] font-bold uppercase tracking-[0.18em] text-gold sm:text-[10px]">One system</span>
         <span className="relative mt-2 font-heading text-sm font-bold leading-tight text-mist sm:text-xl lg:text-2xl">
@@ -100,7 +101,7 @@ export function About() {
               {about.lead}
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-3">
-              <a href="#contact" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-lavender px-5 font-semibold text-graphite transition-colors hover:bg-lavender/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lavender">
+              <a href="#contact" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-lavender px-5 font-semibold text-graphite transition-colors hover:bg-[var(--lavender-hover)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lavender">
                 {contact.cta} <ArrowUpRightIcon className="size-4" aria-hidden="true" />
               </a>
               <a href="#approach" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-line px-5 font-semibold text-mist transition-colors hover:border-lavender hover:bg-lavender/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lavender">

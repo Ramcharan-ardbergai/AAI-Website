@@ -1,0 +1,211 @@
+.clarity-panel {
+  background: radial-gradient(circle at 53% 47%, color-mix(in srgb, var(--lavender) 13%, transparent), transparent 30%), var(--panel);
+  box-shadow: 0 30px 85px -65px color-mix(in srgb, var(--lavender) 45%, transparent);
+}
+
+.clarity-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.55;
+  background-image: radial-gradient(color-mix(in srgb, var(--mist) 12%, transparent) 0.7px, transparent 0.7px);
+  background-size: 21px 21px;
+  mask-image: linear-gradient(90deg, black, transparent 82%);
+}
+
+.clarity-stage {
+  position: relative;
+  height: 360px;
+}
+
+.clarity-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.clarity-lines-mobile { display: none; }
+
+.clarity-wire {
+  stroke: var(--lavender);
+  stroke-width: 1.5;
+  stroke-opacity: 0.34;
+}
+
+.clarity-wire-pulse {
+  stroke: var(--gold);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 0.09 0.91;
+  stroke-dashoffset: 1;
+  opacity: 0;
+}
+
+.clarity-chip {
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 36px;
+  padding: 7px 11px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--elevated);
+  color: var(--mist);
+  box-shadow: 0 12px 25px rgb(0 0 0 / 0.16);
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.clarity-chip-dot {
+  width: 6px;
+  height: 6px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--gold) 65%, transparent);
+}
+
+.clarity-chip-1 { left: 3%; top: 7%; transform: rotate(-5deg); }
+.clarity-chip-2 { left: 14%; top: 25%; transform: rotate(3deg); }
+.clarity-chip-3 { left: 3%; top: 45%; transform: rotate(-2deg); }
+.clarity-chip-4 { left: 15%; top: 66%; transform: rotate(5deg); }
+.clarity-chip-5 { left: 4%; top: 84%; transform: rotate(-4deg); }
+
+.clarity-core {
+  position: absolute;
+  z-index: 2;
+  left: 52.5%;
+  top: 50%;
+  display: flex;
+  width: 100px;
+  height: 100px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid color-mix(in srgb, var(--lavender) 70%, transparent);
+  border-radius: 50%;
+  background: var(--graphite);
+  box-shadow: 0 0 0 9px color-mix(in srgb, var(--lavender) 8%, transparent), 0 0 55px color-mix(in srgb, var(--lavender) 42%, transparent);
+  transform: translate(-50%, -50%);
+}
+
+.clarity-core-ring {
+  position: absolute;
+  inset: 10px;
+  border: 1px dashed color-mix(in srgb, var(--lavender) 55%, transparent);
+  border-radius: 50%;
+}
+
+.clarity-core-halo {
+  position: absolute;
+  inset: -20px;
+  border: 1px solid color-mix(in srgb, var(--lavender) 15%, transparent);
+  border-radius: 50%;
+}
+
+.clarity-core-label {
+  position: absolute;
+  top: calc(100% + 16px);
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--lavender);
+}
+
+.clarity-result {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  right: 1%;
+  width: 31%;
+  min-height: 276px;
+  padding: 23px;
+  border: 1px solid color-mix(in srgb, var(--lavender) 55%, transparent);
+  border-radius: 20px;
+  background: radial-gradient(circle at 85% 10%, color-mix(in srgb, var(--lavender) 18%, transparent), transparent 58%), var(--graphite);
+  box-shadow: 0 20px 55px color-mix(in srgb, var(--mist) 15%, transparent), 0 0 50px color-mix(in srgb, var(--lavender) 12%, transparent);
+  transform: translateY(-50%);
+}
+
+.clarity-result-mark { height: 38px; }
+.clarity-result-mark span {
+  width: 8px;
+  border-radius: 2px 2px 0 0;
+  background: linear-gradient(to top, color-mix(in srgb, var(--lavender) 40%, transparent), var(--lavender));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .clarity-panel.is-visible .clarity-chip { animation: clarity-chip-arrive 700ms both; }
+  .clarity-panel.is-visible .clarity-chip-2 { animation-delay: 90ms; }
+  .clarity-panel.is-visible .clarity-chip-3 { animation-delay: 170ms; }
+  .clarity-panel.is-visible .clarity-chip-4 { animation-delay: 250ms; }
+  .clarity-panel.is-visible .clarity-chip-5 { animation-delay: 330ms; }
+  .clarity-panel.is-visible .clarity-wire { stroke-dasharray: 1; animation: clarity-draw 1.2s ease-out both; }
+  .clarity-panel.is-visible .clarity-wire-pulse { animation: clarity-flow 4s linear infinite; }
+  .clarity-panel.is-visible .clarity-core { animation: clarity-core-arrive 850ms 600ms both; }
+  .clarity-panel.is-visible .clarity-core-halo { animation: clarity-halo 3s 1.4s ease-out infinite; }
+  .clarity-panel.is-visible .clarity-core-ring { animation: clarity-spin 30s linear infinite; }
+  .clarity-panel.is-visible .clarity-result { animation: clarity-result-arrive 850ms 1.2s both; }
+  .clarity-panel.is-visible .clarity-result-mark span { animation: clarity-bar 700ms 1.7s both; transform-origin: bottom; }
+}
+
+@keyframes clarity-chip-arrive {
+  from { opacity: 0; translate: -20px 12px; }
+  to { opacity: 1; translate: 0 0; }
+}
+@keyframes clarity-draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes clarity-flow {
+  0% { opacity: 0; stroke-dashoffset: 1; }
+  12%, 75% { opacity: 0.95; }
+  100% { opacity: 0; stroke-dashoffset: 0; }
+}
+@keyframes clarity-core-arrive {
+  from { opacity: 0; scale: 0.72; }
+  to { opacity: 1; scale: 1; }
+}
+@keyframes clarity-halo {
+  from { opacity: 0.8; scale: 0.85; }
+  to { opacity: 0; scale: 1.35; }
+}
+@keyframes clarity-spin { to { rotate: 360deg; } }
+@keyframes clarity-result-arrive {
+  from { opacity: 0; translate: 24px 0; }
+  to { opacity: 1; translate: 0 0; }
+}
+@keyframes clarity-bar {
+  from { scale: 1 0.1; }
+  to { scale: 1 1; }
+}
+
+@media (max-width: 767px) {
+  .clarity-stage { height: 630px; }
+  .clarity-lines-desktop { display: none; }
+  .clarity-lines-mobile { display: block; }
+  .clarity-chip { font-size: 10px; min-height: 32px; padding: 6px 8px; }
+  .clarity-chip-1 { left: 3%; top: 8%; }
+  .clarity-chip-2 { left: 49%; top: 17%; }
+  .clarity-chip-3 { left: 1%; top: 29%; }
+  .clarity-chip-4 { left: 46%; top: 39%; }
+  .clarity-chip-5 { left: 8%; top: 45%; }
+  .clarity-core { left: 50%; top: 58%; width: 78px; height: 78px; }
+  .clarity-core-label { top: calc(100% + 10px); font-size: 9px; }
+  .clarity-result { top: auto; right: 4%; bottom: 1%; left: 4%; width: auto; min-height: 0; padding: 17px 20px; transform: none; }
+  .clarity-result-mark { height: 24px; margin-top: 10px; }
+  .clarity-result p { margin-top: 10px; }
+}
+
+@media (max-width: 359px) {
+  .clarity-stage { height: 650px; }
+  .clarity-result { padding: 14px 16px; }
+  .clarity-result-mark { height: 20px; }
+  .clarity-result p:first-of-type { font-size: 20px; }
+}

@@ -22,7 +22,7 @@ export function Industries() {
 
       <div className="mt-8 flex flex-col gap-5 border border-line bg-panel p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
         <p className="max-w-2xl font-heading text-xl font-semibold text-mist sm:text-2xl">{industries.beyond}</p>
-        <Link href="/#contact" className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-lg bg-lavender px-5 text-sm font-semibold text-graphite transition-colors hover:bg-lavender/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lavender">
+        <Link href="#contact" className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-lg bg-lavender px-5 text-sm font-semibold text-graphite transition-colors hover:bg-[var(--lavender-hover)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lavender">
           Let&apos;s talk <ArrowUpRightIcon className="size-4" aria-hidden="true" />
         </Link>
       </div>

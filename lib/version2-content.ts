@@ -150,18 +150,11 @@ export const navGroups: NavGroup[] = [
     })),
   },
   {
-    label: "Resources",
-    eyebrow: "Explore",
-    variant: "compact",
-    items: [{ label: "Blogs", href: "/blogs", description: "Articles are coming soon." }],
-  },
-  {
     label: "Company",
     eyebrow: "Get to know us",
     variant: "compact",
     items: [
       { label: "About ardbergai", href: "/#intro", id: "intro" },
-      { label: "Careers", href: "/careers" },
       { label: "Contact", href: "/#contact", id: "contact" },
     ],
   },

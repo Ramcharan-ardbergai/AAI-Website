@@ -19,7 +19,7 @@ function IndustryArtwork({ index, signal }: { index: number; signal: string }) {
     <div className="relative h-44 shrink-0 overflow-hidden border-b border-line bg-elevated/40 md:h-full md:w-[60%] md:border-b-0 md:border-l" aria-hidden="true">
       <div
         className="absolute inset-0 opacity-40"
-        style={{ backgroundImage: "linear-gradient(to right, rgba(236,238,240,.07) 1px, transparent 1px), linear-gradient(to bottom, rgba(236,238,240,.07) 1px, transparent 1px)", backgroundSize: "24px 24px" }}
+        style={{ backgroundImage: "linear-gradient(to right, color-mix(in srgb, var(--mist) 7%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in srgb, var(--mist) 7%, transparent) 1px, transparent 1px)", backgroundSize: "24px 24px" }}
       />
       <span className="absolute left-5 top-5 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-muted-foreground">
         Industry / {String(index + 1).padStart(2, "0")}
@@ -62,8 +62,8 @@ export function IndustryExplorer() {
         <article
           id={industryAnchor(title)}
           key={title}
-          className="industry-stack-card group mb-4 min-w-0 scroll-mt-24 overflow-hidden border border-line bg-panel shadow-[0_-16px_30px_-20px_rgba(0,0,0,.7)] transition-colors target:border-lavender md:h-[320px] lg:mb-0 lg:h-[clamp(240px,35vh,320px)] lg:motion-safe:sticky"
-          style={{ top: `calc(4.5rem + ${index * 2}rem)`, zIndex: index + 1 }}
+          className="industry-stack-card group mb-4 min-w-0 scroll-mt-24 overflow-hidden border border-line bg-panel transition-colors target:border-lavender md:h-[320px] lg:mb-0 lg:h-[clamp(240px,35vh,320px)] lg:motion-safe:sticky"
+          style={{ top: `calc(4.5rem + ${index * 2}rem)`, zIndex: index + 1, boxShadow: "0 -16px 30px -20px var(--shadow-color)" }}
         >
           <div className="flex h-8 items-center justify-between gap-3 border-b border-line bg-elevated px-4 sm:px-6">
             <div className="flex min-w-0 items-center gap-3">
@@ -80,7 +80,7 @@ export function IndustryExplorer() {
                 {signals.map((signal) => <span key={signal}>{signal}</span>)}
               </div>
               <Link
-                href="/#contact"
+                href="#contact"
                 className="mt-7 inline-flex w-fit items-center gap-2 border-b border-lavender pb-1 font-mono text-[11px] font-bold uppercase tracking-[0.12em] text-lavender transition-colors hover:text-mist focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lavender md:mt-auto"
               >
                 Discuss this industry <ArrowUpRightIcon className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
