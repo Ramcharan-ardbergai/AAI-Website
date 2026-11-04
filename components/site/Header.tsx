@@ -75,6 +75,9 @@ export function Header({ palette }: { palette: PaletteSlug }) {
                     {palette === option.slug && <CheckIcon className="size-4 text-lavender" aria-hidden="true" />}
                   </span>
                   <span className="mt-1 block text-xs text-muted-foreground">{option.description}</span>
+                  <span className="mt-1 block font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-lavender">
+                    {option.font}
+                  </span>
                   <span className="mt-2 flex gap-1" aria-hidden="true">
                     {option.swatches.map((swatch) => <span key={swatch.name} className="h-3 flex-1 rounded-sm border border-line" style={{ backgroundColor: swatch.hex }} />)}
                   </span>
@@ -98,8 +101,16 @@ export function Header({ palette }: { palette: PaletteSlug }) {
               <div className="border-b border-line pb-4">
                 <p className="mb-2 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-gold">Colour palettes</p>
                 {palettes.map((option) => (
-                  <Link key={option.slug} href={`${option.href}${sectionHash}`} onClick={() => setMobileOpen(false)} aria-current={palette === option.slug ? "page" : undefined} className="flex items-center justify-between rounded-lg px-2 py-2 text-sm text-mist hover:bg-elevated focus-visible:outline-2 focus-visible:outline-lavender">
-                    <span className="flex items-center gap-2"><span className="size-3 rounded-full border border-line" style={{ backgroundColor: option.swatches[2].hex }} aria-hidden="true" />{option.name}</span>
+                  <Link key={option.slug} href={`${option.href}${sectionHash}`} onClick={() => setMobileOpen(false)} aria-current={palette === option.slug ? "page" : undefined} className="grid grid-cols-[1fr_auto] gap-2 rounded-lg px-2 py-2 text-sm text-mist hover:bg-elevated focus-visible:outline-2 focus-visible:outline-lavender">
+                    <span>
+                      <span className="flex items-center gap-2">
+                        <span className="size-3 rounded-full border border-line" style={{ backgroundColor: option.swatches[2].hex }} aria-hidden="true" />
+                        {option.name}
+                      </span>
+                      <span className="mt-1 block pl-5 font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
+                        {option.font}
+                      </span>
+                    </span>
                     {palette === option.slug && <CheckIcon className="size-4 text-lavender" aria-hidden="true" />}
                   </Link>
                 ))}

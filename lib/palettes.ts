@@ -2,6 +2,7 @@ export const palettes = [
   {
     slug: "graphite",
     name: "Graphite",
+    font: "Instrument Sans + Instrument Serif",
     description: "The current dark palette",
     href: "/",
     swatches: [
@@ -14,6 +15,7 @@ export const palettes = [
   {
     slug: "violet",
     name: "Brand violet",
+    font: "IBM Plex Sans",
     description: "Light, brand led, intelligent",
     href: "/palette/violet",
     swatches: [
@@ -26,6 +28,7 @@ export const palettes = [
   {
     slug: "signal",
     name: "Signal blue",
+    font: "DM Sans",
     description: "Light, minimal, high contrast",
     href: "/palette/signal",
     swatches: [
@@ -38,6 +41,7 @@ export const palettes = [
   {
     slug: "navy",
     name: "Deep navy",
+    font: "Manrope",
     description: "Cool white with Ardberg blue",
     href: "/palette/navy",
     swatches: [

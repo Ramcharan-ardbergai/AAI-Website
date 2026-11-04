@@ -31,6 +31,10 @@
   --ring: var(--lavender);
   --destructive: #b42318;
   --radius: 0.75rem;
+
+  --font-palette-sans: var(--font-instrument-sans);
+  --font-palette-heading: var(--font-instrument-sans);
+  --font-palette-serif: var(--font-instrument-serif);
 }
 
 .palette-violet,
@@ -64,6 +68,9 @@
   --gold: #545ab8;
   --muted: #5f6472;
   --line: #dfe1e9;
+  --font-palette-sans: var(--font-ibm-plex-sans);
+  --font-palette-heading: var(--font-ibm-plex-sans);
+  --font-palette-serif: var(--font-ibm-plex-sans);
 }
 
 .palette-signal {
@@ -76,6 +83,9 @@
   --gold: #687280;
   --muted: #687280;
   --line: #e1e4e8;
+  --font-palette-sans: var(--font-dm-sans);
+  --font-palette-heading: var(--font-dm-sans);
+  --font-palette-serif: var(--font-dm-sans);
 }
 
 .palette-navy {
@@ -88,6 +98,9 @@
   --gold: #2563a8;
   --muted: #526d82;
   --line: #d9e5eb;
+  --font-palette-sans: var(--font-manrope);
+  --font-palette-heading: var(--font-manrope);
+  --font-palette-serif: var(--font-manrope);
 }
 
 .palette-violet .site-logo-mark,
@@ -123,10 +136,10 @@
   --color-ring: var(--ring);
   --color-destructive: var(--destructive);
 
-  --font-sans: var(--font-inter);
-  --font-heading: var(--font-space-grotesk);
+  --font-sans: var(--font-palette-sans);
+  --font-heading: var(--font-palette-heading);
   --font-mono: var(--font-jetbrains-mono);
-  --font-serif: var(--font-lora);
+  --font-serif: var(--font-palette-serif);
 
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);

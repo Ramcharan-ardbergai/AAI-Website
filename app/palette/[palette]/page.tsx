@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import { HomeSections } from "@/components/site/HomeSections";
-import { PalettePreview } from "@/components/site/PalettePreview";
 import { getPalette, palettes } from "@/lib/palettes";
 
 export function generateStaticParams() {
@@ -13,10 +12,5 @@ export default async function PalettePage({ params }: PageProps<"/palette/[palet
 
   if (!palette || palette.slug === "graphite") notFound();
 
-  return (
-    <>
-      <PalettePreview palette={palette} />
-      <HomeSections />
-    </>
-  );
+  return <HomeSections />;
 }
