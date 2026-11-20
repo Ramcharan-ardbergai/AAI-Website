@@ -51,6 +51,7 @@ export class Swarm {
   private stages: Stage[] = [];
   private readonly anchors = new Map<string, DOMRect>();
   private progress = 0;
+  private smoothProgress = 0;
   private vw = 0;
   private vh = 0;
   private dpr = 1;
@@ -70,9 +71,16 @@ export class Swarm {
     if (!ctx) throw new Error("2D canvas unavailable");
     this.ctx = ctx;
     this.reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const style = getComputedStyle(canvas);
-    this.ink = style.getPropertyValue("--ink").trim() || this.ink;
-    this.violet = style.getPropertyValue("--violet").trim() || this.violet;
+    const readColors = () => {
+      const style = getComputedStyle(canvas);
+      this.ink = style.getPropertyValue("--ink").trim() || this.ink;
+      this.violet = style.getPropertyValue("--violet").trim() || this.violet;
+      this.request();
+    };
+    readColors();
+    // The theme picker changes the palette live.
+    window.addEventListener("nano-theme", readColors);
+    this.cleanup.push(() => window.removeEventListener("nano-theme", readColors));
 
     const onResize = () => this.resize();
     const onPointer = (e: PointerEvent) => {
@@ -204,7 +212,12 @@ export class Swarm {
           // hidden where it passes behind the planet.
           const a = r0[i] * TAU + t * 0.35;
           const rr = 1.38 + (r1[i] - 0.5) * 0.12;
-          project(Math.cos(a) * rr, 0, Math.sin(a) * rr, 0, -0.42);
+          // The ring stays centred on the planet; its plane turns continuously
+          // about the centre, a full 360° flip roughly every 80 seconds.
+          // Starts near horizontal with a slight tilt (~-15°), then keeps turning.
+          const roll = -0.26 + t * 0.08;
+          const rxp = Math.cos(a) * rr;
+          project(rxp * Math.cos(roll), rxp * Math.sin(roll), Math.sin(a) * rr, 0, -0.42);
           const dx = out.x - cx;
           const dy = out.y - cy;
           out.hidden = out.z < 0 && dx * dx + dy * dy < R * R * 0.98;
@@ -351,7 +364,10 @@ export class Swarm {
       const host = stage.el.closest<HTMLElement>("[data-swarm-scroll]");
       if (host) {
         const r = host.getBoundingClientRect();
-        this.progress = clamp01(-r.top / Math.max(1, r.height - this.vh));
+        const target = clamp01(-r.top / Math.max(1, r.height - this.vh));
+        // Ease toward the scroll position so morphs flow instead of stepping.
+        this.smoothProgress += (target - this.smoothProgress) * (this.reduced ? 1 : 0.08);
+        this.progress = this.smoothProgress;
       }
     }
     const { ctx, n, x, y, vx, vy, z, k, charge, mouse, reduced } = this;

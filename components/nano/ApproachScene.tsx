@@ -33,11 +33,15 @@ export function ApproachScene() {
     };
   }, []);
 
-  const step = p < 0.3 ? 0 : p < 0.62 ? 1 : 2;
-  const scattered = p < 0.4;
+  // Three snap points (p = 0, 0.5, 1): one scroll gesture per step.
+  const step = p < 0.25 ? 0 : p < 0.75 ? 1 : 2;
+  const scattered = p < 0.3;
 
   return (
     <section id="approach" ref={ref} data-swarm-scroll className="nano-approach">
+      <span className="nano-snap" style={{ top: 0 }} aria-hidden="true" />
+      <span className="nano-snap" style={{ top: "60vh" }} aria-hidden="true" />
+      <span className="nano-snap" style={{ top: "120vh" }} aria-hidden="true" />
       <div className="nano-approach-pin">
         <div className="nano-wrap nano-approach-grid">
           <div>
@@ -65,7 +69,7 @@ export function ApproachScene() {
                 {label}
               </span>
             ))}
-            <div className="nano-outcome" data-visible={p > 0.72 || undefined}>
+            <div className="nano-outcome" data-visible={p > 0.8 || undefined}>
               <p className="nano-label">Unified system</p>
               <p className="nano-outcome-title">One connected intelligence.</p>
               <p className="nano-outcome-body">Clear signals. Useful decisions.</p>

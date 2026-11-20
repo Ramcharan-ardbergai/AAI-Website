@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { footer, site } from "@/lib/version2-content";
+import { ThemePicker } from "./ThemePicker";
 
 const links = [
   { label: "Approach", href: "#approach" },
@@ -12,7 +12,8 @@ export function NanoHeader() {
     <header className="nano-header">
       <div className="nano-wrap nano-header-row">
         <a href="#about" className="nano-logo">
-          <Image src="/logo.png" alt="" width={38} height={26} priority className="nano-logo-mark" />
+          {/* The PNG is used as a stencil so the mark takes the theme's Logo colour. */}
+          <span className="nano-logo-mark" aria-hidden="true" />
           <span>
             ardberg<span className="nano-accent">ai</span>
           </span>
@@ -25,9 +26,12 @@ export function NanoHeader() {
             </a>
           ))}
         </nav>
-        <a href="#contact" className="nano-btn nano-btn-small">
-          Contact us
-        </a>
+        <div className="nano-header-actions">
+          <ThemePicker />
+          <a href="#contact" className="nano-btn nano-btn-small">
+            Contact us
+          </a>
+        </div>
       </div>
     </header>
   );
