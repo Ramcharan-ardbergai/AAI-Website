@@ -44,21 +44,30 @@ export const approach = {
   eyebrow: "Our approach",
   // TODO: placeholder copy
   title: "From cluster to clarity.",
+  // TODO: placeholder copy
+  lead: "Your information is scattered across files and tools. We turn it into one system your team can use, in three steps.",
   // Messy starting points, taken from the website-story picture
   cluster: ["Spreadsheets", "Legacy ERP", "Siloed data", "PDF archives", "Disconnected tools"],
-  // TODO: placeholder copy
+  // The building blocks chosen in step two
+  solutions: ["Models", "Data", "Software"],
+  resultLabel: "One connected system",
+  outputLabel: "You get",
+  // TODO: placeholder copy; confirm each output matches what is really delivered
   steps: [
     {
       title: "Understand the challenge",
-      body: "We start with your goals and the systems in the way, before anything is built.",
+      body: "We agree on the goal and map where your data lives and what blocks it.",
+      output: "A clear problem statement and a map of your systems.",
     },
     {
       title: "Match the right solution",
-      body: "We identify the opportunity and choose the right models, data and software for it.",
+      body: "We pick the use case worth solving first, then the models, data and software it needs.",
+      output: "A focused plan with a defined first release.",
     },
     {
       title: "Connect it into one intelligence",
-      body: "Everything works together as one system your teams and decisions can rely on.",
+      body: "We build it, connect it to your existing tools and put it in your team's hands.",
+      output: "A working system your team uses to make decisions.",
     },
   ],
 };

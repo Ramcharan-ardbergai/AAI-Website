@@ -16,7 +16,7 @@ const primary = `inline-flex min-h-12 items-center justify-center gap-2 rounded-
 const quiet = `inline-flex min-h-11 items-center gap-2 rounded-lg px-2 text-sm font-medium text-muted-foreground transition-colors hover:text-mist ${focusRing}`;
 const choice = `rounded-xl border text-sm font-medium transition-colors ${focusRing}`;
 const chosen = "border-lavender bg-lavender text-graphite";
-const unchosen = "border-line text-mist hover:border-lavender hover:bg-lavender/10";
+const unchosen = "border-line bg-elevated text-mist hover:border-lavender hover:bg-lavender/15";
 
 /** The message as it takes shape, beside the questions. */
 function Preview({ values }: { values: Enquiry }) {
@@ -32,19 +32,19 @@ function Preview({ values }: { values: Enquiry }) {
   return (
     <div className="mt-auto hidden pt-6 md:block">
       <div className="relative mx-auto mb-6 flex size-32 items-center justify-center [@media(max-height:700px)]:hidden" aria-hidden="true">
-        <span className="absolute inset-0 rounded-full border border-dashed border-graphite/40 motion-safe:animate-[spin_40s_linear_infinite]" />
-        <span className="absolute inset-4 rounded-full border border-graphite/25" />
-        <span className="flex size-16 items-center justify-center rounded-full bg-graphite text-lavender">
+        <span className="absolute inset-0 rounded-full border border-dashed border-lavender/40 motion-safe:animate-[spin_40s_linear_infinite]" />
+        <span className="absolute inset-4 rounded-full border border-lavender/25" />
+        <span className="flex size-16 items-center justify-center rounded-full bg-lavender/15 text-lavender">
           <Icon key={values.industry} className="size-8 animate-in fade-in zoom-in-50 duration-300" strokeWidth={1.5} />
         </span>
       </div>
-      <div className="rounded-2xl bg-graphite p-5 shadow-2xl">
+      <div className="rounded-2xl border border-line bg-panel p-5">
         <p className={label}>{contactForm.preview.title}</p>
         <dl className="space-y-2.5">
           {rows.map(([name, value]) => (
             <div key={name} className="grid grid-cols-[5.5rem_minmax(0,1fr)] gap-3 text-sm">
               <dt className="text-muted-foreground">{name}</dt>
-              <dd className={cn("line-clamp-2 break-words", value ? "font-medium text-mist" : "text-muted-foreground/50")}>{value || "—"}</dd>
+              <dd className={cn("line-clamp-2 break-words", value ? "font-medium text-mist" : "text-muted-foreground")}>{value || "—"}</dd>
             </div>
           ))}
         </dl>
@@ -134,9 +134,9 @@ export function ContactDialog({ palette }: { palette: PaletteSlug }) {
         <Dialog.Backdrop className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0" />
         {/* The window is portalled out of the page, so it needs the palette class itself. */}
         <Dialog.Popup data-contact-panel="" className={`palette-${palette} fixed inset-0 z-50 flex flex-col overflow-hidden bg-panel font-sans text-mist shadow-2xl transition duration-200 data-ending-style:scale-95 data-ending-style:opacity-0 data-starting-style:scale-95 data-starting-style:opacity-0 sm:inset-0 sm:m-auto sm:h-[min(42rem,calc(100dvh-3rem))] sm:w-[min(64rem,calc(100vw-3rem))] sm:rounded-3xl sm:border sm:border-line md:flex-row`}>
-          <div className="flex shrink-0 flex-col bg-lavender p-5 pr-16 text-graphite md:w-[42%] md:p-8">
-            <Dialog.Title className="font-heading text-2xl font-bold tracking-tight text-graphite md:text-4xl">{contact.cta}</Dialog.Title>
-            <Dialog.Description className="mt-2 text-sm leading-relaxed text-graphite/85 md:text-base">{contact.body}</Dialog.Description>
+          <div className="flex shrink-0 flex-col border-b border-line bg-[color-mix(in_srgb,var(--lavender)_9%,var(--graphite))] p-5 pr-16 md:w-[42%] md:border-b-0 md:border-r md:p-8">
+            <Dialog.Title className="font-heading text-2xl font-bold tracking-tight text-mist md:text-4xl">{contact.cta}</Dialog.Title>
+            <Dialog.Description className="mt-2 text-sm leading-relaxed text-muted-foreground md:text-base">{contact.body}</Dialog.Description>
             <Preview values={values} />
           </div>
 
