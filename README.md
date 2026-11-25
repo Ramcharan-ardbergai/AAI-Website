@@ -1,4 +1,4 @@
-# ardbergai website
+# Ardbergai website
 
 Single-page site using the version 2 design, with colour palette previews. Built with Next.js (App Router, TypeScript), Tailwind CSS v4, and shadcn/ui (Button, Sheet).
 
