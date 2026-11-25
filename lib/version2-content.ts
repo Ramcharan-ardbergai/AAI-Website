@@ -103,6 +103,46 @@ export const contact = {
   cta: "Start a conversation",
 };
 
+/** Copy for the Palette3 "Start a conversation" panel. */
+export const contactForm = {
+  // TODO: placeholder copy
+  subject: "New conversation",
+  otherIndustry: "Another industry",
+  notSure: "Not sure yet",
+  challengeHint: "What are you trying to solve? What gets in the way today?",
+  note: "This opens a draft in your email app. Nothing is sent until you press send.",
+  draftTitle: "Your email is ready to send",
+  draftBody: "Check the draft in your email app and press send to reach us.",
+  steps: ["Your world", "The challenge", "About you"],
+  headings: ["Where are you working?", "What are you trying to solve?", "Where can we reach you?"],
+  preview: { title: "Your message so far", industry: "Industry", help: "Together", challenge: "Challenge", from: "From" },
+};
+
+/** Copy for the Palette3 guided chat. */
+export const contactChat = {
+  // TODO: placeholder copy
+  launcher: "Chat with us",
+  title: "Chat with ardbergai",
+  subtitle: "Automated questions, not a live agent",
+  switchPrompt: "Prefer to chat?",
+  greeting: "Hi! A few quick questions and your message will be ready.",
+  questions: {
+    industry: "Which industry are you in?",
+    help: "How would you like to work together?",
+    challenge: "What challenge are you working through?",
+    name: "What's your name?",
+    email: "What's your work email?",
+    company: "Which company are you with? (optional)",
+  },
+  hint: "Type your answer",
+  optionalHint: "Type, or press send to skip",
+  chooseHint: "Choose an option above",
+  skipped: "Skipped",
+  summary: "Thanks. Here's your message:",
+  copied: "Copied. Send it to",
+  fallback: "No email app opened? Copy the message and send it to",
+};
+
 export const footer = {
   // TODO: placeholder copy
   tagline: "AI & software engineering",

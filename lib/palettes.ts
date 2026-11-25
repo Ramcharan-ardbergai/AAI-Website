@@ -1,4 +1,4 @@
-export const palettes = [
+export const palette1 = [
   {
     slug: "graphite",
     name: "Graphite",
@@ -53,9 +53,15 @@ export const palettes = [
   },
 ] as const;
 
-export type Palette = (typeof palettes)[number];
+export type Palette = (typeof palette1)[number];
 export type PaletteSlug = Palette["slug"];
 
 export function getPalette(slug: string) {
-  return palettes.find((palette) => palette.slug === slug);
+  return palette1.find((palette) => palette.slug === slug);
 }
+
+/** Palette3: the Palette1 colour themes on the pages with the industry orbit. */
+export const palette3 = palette1.map((palette) => ({
+  ...palette,
+  href: palette.slug === "graphite" ? "/palette3" : `/palette3/${palette.slug}`,
+}));

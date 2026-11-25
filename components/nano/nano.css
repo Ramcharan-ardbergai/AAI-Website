@@ -1,0 +1,905 @@
+/* ---------------------------------------------------------------------------
+ * Microbot lab: light concrete, black bots, one violet charge.
+ * (All styles live here; app/globals.css is left as on main.)
+ * ------------------------------------------------------------------------- */
+
+.nano-world {
+  --ground: #e6e7e4;
+  --ground-deep: #dadcd8;
+  --ink: #0e0f11;
+  --ink-soft: #4a4d52;
+  --line: color-mix(in srgb, var(--ink) 14%, transparent);
+  --violet: #6a3df5;
+  --violet-deep: #5326e0;
+  min-height: 100vh;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+html:has(.nano-world) {
+  background: #e6e7e4;
+  scroll-behavior: smooth;
+  scrollbar-color: #0e0f11 #e6e7e4;
+}
+
+.nano-world ::selection {
+  background: var(--violet);
+  color: #fff;
+}
+
+.nano-world :where(h1, h2, h3, p) {
+  margin: 0;
+}
+
+.nano-world :where(h1, h2, h3) {
+  font-family: inherit;
+  color: var(--ink);
+}
+
+.nano-world section[id] {
+  scroll-margin-top: 72px;
+}
+
+.nano-canvas {
+  position: fixed;
+  inset: 0 auto auto 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.nano-world main > :not(.nano-canvas) {
+  position: relative;
+  z-index: 1;
+}
+
+.nano-wrap {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 4vw, 48px);
+}
+
+/* ---- Type --------------------------------------------------------------- */
+
+.nano-label {
+  display: block;
+  margin-bottom: 18px;
+  font-family: var(--font-mono-nano), ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.nano-h1 {
+  font-size: clamp(44px, 6.2vw, 96px);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+.nano-h2 {
+  max-width: 18ch;
+  font-size: clamp(34px, 4.6vw, 68px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.nano-situation {
+  max-width: 24ch;
+  margin-bottom: 20px;
+  font-size: clamp(22px, 2.2vw, 30px);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--ink-soft);
+}
+
+.nano-hero-title {
+  max-width: 11ch;
+}
+
+.nano-lead {
+  max-width: 32ch;
+  margin-top: 24px;
+  font-size: clamp(19px, 1.7vw, 24px);
+  line-height: 1.35;
+  color: var(--ink-soft);
+}
+
+.nano-body {
+  max-width: 52ch;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+.nano-accent {
+  color: var(--violet);
+}
+
+/* ---- Controls ------------------------------------------------------------ */
+
+.nano-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 36px;
+}
+
+.nano-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 50px;
+  padding: 0 22px;
+  border: 1.5px solid var(--ink);
+  background: var(--ink);
+  color: var(--ground);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.nano-btn:hover {
+  border-color: var(--violet);
+  background: var(--violet);
+  color: #fff;
+}
+
+.nano-btn-ghost {
+  background: transparent;
+  color: var(--ink);
+}
+
+.nano-btn-small {
+  min-height: 40px;
+  padding: 0 16px;
+  font-size: 14px;
+}
+
+.nano-link {
+  font-weight: 600;
+  color: var(--violet);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1.5px;
+}
+
+.nano-link:hover {
+  color: var(--violet-deep);
+}
+
+.nano-world :is(a, button):focus-visible {
+  outline: 2px solid var(--violet);
+  outline-offset: 3px;
+}
+
+/* ---- Header / footer ---------------------------------------------------- */
+
+.nano-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: color-mix(in srgb, var(--ground) 82%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+.nano-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: 68px;
+}
+
+.nano-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.nano-logo-mark {
+  width: 38px;
+  height: 26px;
+  flex: none;
+  background: var(--logo, var(--ink));
+  -webkit-mask: url("/logo.png") center / contain no-repeat;
+  mask: url("/logo.png") center / contain no-repeat;
+}
+
+.nano-nav {
+  display: none;
+  gap: 32px;
+  font-size: 15px;
+}
+
+.nano-nav a {
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+
+.nano-nav a:hover {
+  color: var(--ink);
+}
+
+.nano-footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--line);
+  background: var(--ground);
+}
+
+.nano-footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding-block: 28px;
+  font-family: var(--font-mono-nano), ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+}
+
+/* ---- Sections ----------------------------------------------------------- */
+
+.nano-section {
+  padding-block: clamp(96px, 14vw, 180px);
+}
+
+.nano-hero {
+  display: flex;
+  flex-direction: column;
+}
+
+.nano-hero-grid {
+  display: grid;
+  align-items: center;
+  gap: 24px;
+  padding-block: clamp(24px, 3.5vw, 48px) clamp(40px, 5vw, 64px);
+}
+
+.nano-hero-stage {
+  height: min(80vw, 420px);
+}
+
+.nano-ribbon {
+  display: grid;
+  gap: 20px;
+  padding-block: 0 40px;
+  list-style: none;
+}
+
+.nano-ribbon li {
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 4px;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+.nano-ribbon .nano-label {
+  margin-bottom: 6px;
+}
+
+.nano-ribbon strong {
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.nano-intro {
+  display: grid;
+  gap: 40px;
+  align-items: center;
+}
+
+.nano-intro-title {
+  max-width: 16ch;
+}
+
+.nano-intro-stage {
+  height: min(110vw, 560px);
+}
+
+/* Approach: pinned while the swarm turns clusters into one cube. */
+.nano-approach {
+  height: 220vh;
+}
+
+/* Proximity snap points, one per step (see ApproachScene). */
+html:has(.nano-world) {
+  scroll-snap-type: y proximity;
+}
+
+.nano-snap {
+  position: absolute;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  scroll-snap-align: start;
+  pointer-events: none;
+}
+
+.nano-approach-pin {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  min-height: 100svh;
+  padding-block: 88px 32px;
+}
+
+.nano-approach-grid {
+  display: grid;
+  gap: 32px;
+  align-items: center;
+}
+
+.nano-steps {
+  display: grid;
+  gap: 22px;
+  margin: 40px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nano-step {
+  position: relative;
+  padding-left: 22px;
+  opacity: 0.38;
+  transition: opacity 300ms ease;
+}
+
+.nano-step[data-active] {
+  opacity: 1;
+}
+
+.nano-step-bar {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 0;
+  width: 2px;
+  background: var(--line);
+}
+
+.nano-step[data-active] .nano-step-bar {
+  background: var(--violet);
+}
+
+.nano-step h3 {
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.nano-step p {
+  max-width: 44ch;
+  margin-top: 6px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.nano-approach-stage {
+  position: relative;
+  height: min(90vw, 520px);
+}
+
+.nano-cluster {
+  position: absolute;
+  font-family: var(--font-mono-nano), ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  translate: -50% -50%;
+  transition: opacity 400ms ease;
+}
+
+.nano-cluster[data-hidden] {
+  opacity: 0;
+}
+
+.nano-cluster-0 { left: 18%; top: 16%; }
+.nano-cluster-1 { left: 76%; top: 12%; }
+.nano-cluster-2 { left: 50%; top: 50%; }
+.nano-cluster-3 { left: 20%; top: 84%; }
+.nano-cluster-4 { left: 78%; top: 82%; }
+
+.nano-outcome {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  max-width: 240px;
+  opacity: 0;
+  translate: 0 12px;
+  transition: opacity 400ms ease, translate 400ms ease;
+}
+
+.nano-outcome[data-visible] {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.nano-outcome .nano-label {
+  margin-bottom: 8px;
+}
+
+.nano-outcome-title {
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.nano-outcome-body {
+  margin-top: 6px;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+/* Offer */
+.nano-offer {
+  display: grid;
+  gap: 48px;
+  margin: 56px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nano-offer-stage {
+  height: 200px;
+  margin-bottom: 24px;
+}
+
+.nano-offer h3 {
+  margin-bottom: 10px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Industries */
+.nano-industries-head {
+  display: grid;
+  gap: 24px;
+}
+
+.nano-industries {
+  display: grid;
+  gap: 32px;
+  margin-top: 56px;
+}
+
+.nano-industry-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.nano-industry-list li {
+  border-bottom: 1px solid var(--line);
+}
+
+.nano-industry-tab {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  width: 100%;
+  padding: 14px 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: clamp(18px, 1.6vw, 22px);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  text-align: left;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: color 150ms ease, padding 200ms ease;
+}
+
+.nano-industry-tab[aria-selected="true"] {
+  padding-left: 10px;
+  color: var(--ink);
+}
+
+.nano-industry-index {
+  font-family: var(--font-mono-nano), ui-monospace, monospace;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--ink-soft);
+}
+
+.nano-industry-tab[aria-selected="true"] .nano-industry-index {
+  color: var(--violet);
+}
+
+/* 7-second timer on the list's bottom edge; hovering the block pauses it. */
+.nano-industry-listwrap {
+  position: relative;
+}
+
+.nano-industry-list li:last-child {
+  border-bottom: 0;
+}
+
+.nano-industry-progress {
+  height: 2px;
+  background: var(--line);
+}
+
+.nano-industry-progress span {
+  display: block;
+  height: 100%;
+  background: var(--violet);
+  transform-origin: left;
+  animation: nano-industry-timer 7s linear forwards;
+}
+
+.nano-industries:hover .nano-industry-progress span,
+.nano-industries:focus-within .nano-industry-progress span {
+  animation-play-state: paused;
+}
+
+@keyframes nano-industry-timer {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.nano-industry-stage {
+  height: 260px;
+  margin-bottom: 24px;
+}
+
+.nano-industry-title {
+  margin-bottom: 12px;
+  font-size: clamp(26px, 2.6vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.nano-signals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 18px 0 22px;
+}
+
+.nano-signals span {
+  padding: 5px 10px;
+  border: 1px solid var(--line);
+  font-family: var(--font-mono-nano), ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+.nano-beyond {
+  margin-top: 56px;
+  font-size: 18px;
+  color: var(--ink-soft);
+}
+
+/* Contact */
+.nano-contact {
+  position: relative;
+  padding-block: clamp(120px, 16vw, 220px);
+  overflow: hidden;
+}
+
+.nano-contact-stage {
+  position: absolute;
+  inset: 0;
+}
+
+.nano-contact-copy {
+  position: relative;
+}
+
+.nano-contact-copy .nano-btn {
+  margin-top: 36px;
+}
+
+.nano-contact-meta {
+  margin-top: 28px;
+}
+
+/* ---- Breakpoints -------------------------------------------------------- */
+
+@media (min-width: 768px) {
+  .nano-nav {
+    display: flex;
+  }
+
+  .nano-ribbon {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px;
+  }
+
+  .nano-offer {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .nano-hero-grid {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  }
+
+  .nano-hero-stage {
+    height: min(40vw, 560px);
+  }
+
+  .nano-intro,
+  .nano-approach-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .nano-industries-head {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+    align-items: end;
+  }
+
+  .nano-industries {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 64px;
+    align-items: start;
+  }
+
+  .nano-industry-panel {
+    position: sticky;
+    top: 100px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nano-world *,
+  html:has(.nano-world) {
+    scroll-behavior: auto;
+    transition: none !important;
+  }
+}
+
+/* ---- Theme picker (palette playground) ----------------------------------- */
+
+.nano-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nano-theme {
+  position: relative;
+}
+
+.nano-theme-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 12px;
+  border: 1.5px solid var(--line);
+  background: transparent;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.nano-theme-trigger:hover {
+  border-color: var(--ink);
+}
+
+.nano-theme-dots {
+  display: inline-flex;
+}
+
+.nano-theme-dots span {
+  width: 12px;
+  height: 12px;
+  margin-left: -3px;
+  border: 1.5px solid var(--ground);
+  border-radius: 50%;
+}
+
+.nano-theme-panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 50;
+  display: grid;
+  grid-template-columns: 260px 220px;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  background: var(--ground);
+  box-shadow: 0 18px 40px -18px rgb(0 0 0 / 0.35);
+}
+
+.nano-theme-roles {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nano-theme-role {
+  display: grid;
+  grid-template-columns: 22px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid transparent;
+  background: none;
+  font: inherit;
+  text-align: left;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.nano-theme-role:hover {
+  background: var(--ground-deep);
+}
+
+.nano-theme-role[aria-pressed="true"] {
+  border-color: var(--ink);
+}
+
+.nano-theme-role strong {
+  display: block;
+  font-size: 13px;
+}
+
+.nano-theme-role small {
+  display: block;
+  font-size: 11px;
+  color: var(--ink-soft);
+}
+
+.nano-theme-role code,
+.nano-theme-hex {
+  font-family: var(--font-mono-nano), ui-monospace, monospace;
+  font-size: 11px;
+}
+
+.nano-theme-swatch {
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--line);
+}
+
+.nano-theme-editor {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+}
+
+.nano-theme-editor .react-colorful {
+  width: 100%;
+  height: 180px;
+}
+
+.nano-theme-hex {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink-soft);
+}
+
+.nano-theme-hex input {
+  flex: 1;
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid var(--line);
+  background: var(--ground);
+  font: inherit;
+  font-size: 13px;
+  color: var(--ink);
+  text-transform: uppercase;
+}
+
+.nano-theme-reset {
+  padding: 8px;
+  border: 1px solid var(--line);
+  background: none;
+  font: inherit;
+  font-size: 13px;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.nano-theme-reset:hover {
+  border-color: var(--ink);
+}
+
+.nano-theme-heading {
+  margin-top: 4px;
+  font-family: var(--font-mono-nano), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.nano-theme-presets {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.nano-theme-preset {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 150ms ease, border-color 150ms ease;
+}
+
+.nano-theme-preset:hover {
+  border-color: var(--ink);
+  transform: translateY(-1px);
+}
+
+.nano-theme-preset-dots {
+  display: flex;
+  gap: 4px;
+}
+
+.nano-theme-preset-dots span {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 0.12);
+}
+
+@media (max-width: 640px) {
+  .nano-theme-panel {
+    position: fixed;
+    top: 72px;
+    right: 12px;
+    left: 12px;
+    grid-template-columns: 1fr;
+    max-height: calc(100svh - 90px);
+    overflow-y: auto;
+  }
+}
+
+/* ---- Link back to the Palette1 site ------------------------------------- */
+
+.nano-back {
+  text-decoration: none;
+}
+
+@media (max-width: 520px) {
+  .nano-header-actions .nano-btn-small {
+    display: none;
+  }
+}

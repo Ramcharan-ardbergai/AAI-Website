@@ -1,0 +1,40 @@
+/* Orbit motion for the Industries section. */
+.industry-orbit-ring {
+  transform-origin: 50% 50%;
+  animation: industry-orbit-spin 60s linear infinite;
+}
+
+/* Dashes travel from the selected industry into the core. */
+.industry-orbit-flow {
+  animation: industry-orbit-flow 0.8s linear infinite;
+}
+
+/* One ninth of the orbit (40 of 360) is the hop to the next industry. */
+.industry-orbit-travel {
+  animation: industry-orbit-travel 3s ease-in-out forwards;
+}
+
+.industry-orbit:focus-within .industry-orbit-travel {
+  animation-play-state: paused;
+}
+
+@keyframes industry-orbit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes industry-orbit-flow {
+  to {
+    stroke-dashoffset: -4;
+  }
+}
+
+@keyframes industry-orbit-travel {
+  from {
+    stroke-dasharray: 0 360;
+  }
+  to {
+    stroke-dasharray: 40 360;
+  }
+}

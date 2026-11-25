@@ -1,0 +1,162 @@
+/* Motion for the Palette3 "What we offer" cards. */
+.offer-scene {
+  background-image: radial-gradient(color-mix(in srgb, var(--mist) 12%, transparent) 0.8px, transparent 0.8px);
+  background-size: 18px 18px;
+}
+
+.offer-card {
+  transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+}
+
+.offer-spotlight {
+  background: radial-gradient(260px circle at var(--x, 50%) var(--y, 0%), color-mix(in srgb, var(--lavender) 18%, transparent), transparent 70%);
+  opacity: 0;
+  transition: opacity 300ms;
+}
+
+.offer-card:hover .offer-spotlight {
+  opacity: 1;
+}
+
+/* Tilted slabs, seen from above. */
+.offer-layer {
+  position: absolute;
+  left: 50%;
+  display: flex;
+  width: 68%;
+  height: 52px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 18px;
+  border-radius: 12px;
+  box-shadow: 0 14px 28px -10px var(--shadow-color);
+  transform: translateX(-50%) perspective(400px) rotateX(28deg);
+}
+
+/* The card scenes loop only for people who welcome motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .offer-layer {
+    animation: offer-float 3.6s ease-in-out infinite;
+  }
+
+  .offer-card:hover .offer-layer {
+    animation-duration: 1.8s;
+  }
+
+  .offer-light {
+    animation: offer-blink 1.8s ease-in-out infinite;
+  }
+
+  .offer-journey {
+    animation: offer-draw 4s ease-in-out infinite;
+  }
+
+  .offer-traveller {
+    animation: offer-travel 4s ease-in-out infinite;
+  }
+
+  .offer-stop {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: offer-pop 4s ease-in-out infinite;
+  }
+
+  .offer-team {
+    animation: offer-spin 24s linear infinite;
+  }
+
+  .offer-upright {
+    animation: offer-spin 24s linear infinite reverse;
+  }
+
+  .offer-join {
+    animation: offer-join 4.2s cubic-bezier(0.3, 1.4, 0.5, 1) infinite both;
+  }
+
+  /* Cards rise into view while scrolling, where the browser supports it. */
+  @supports (animation-timeline: view()) {
+    .offer-reveal {
+      animation: offer-reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+  }
+}
+
+/* Without motion the traveller waits at the destination. */
+@media (prefers-reduced-motion: reduce) {
+  .offer-traveller {
+    offset-distance: 100%;
+  }
+}
+
+@keyframes offer-float {
+  50% {
+    translate: 0 -9px;
+  }
+}
+
+@keyframes offer-blink {
+  50% {
+    opacity: 0.2;
+  }
+}
+
+@keyframes offer-draw {
+  from {
+    stroke-dashoffset: 100;
+  }
+  75%,
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes offer-travel {
+  from {
+    offset-distance: 0%;
+  }
+  75%,
+  to {
+    offset-distance: 100%;
+  }
+}
+
+@keyframes offer-pop {
+  8% {
+    scale: 1.5;
+  }
+  18% {
+    scale: 1;
+  }
+}
+
+@keyframes offer-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+/* Start outside the circle, take a seat, stay, then leave to repeat. */
+@keyframes offer-join {
+  0% {
+    translate: 0 -46px;
+    opacity: 0;
+  }
+  22%,
+  86% {
+    translate: 0 0;
+    opacity: 1;
+  }
+  100% {
+    translate: 0 -46px;
+    opacity: 0;
+  }
+}
+
+@keyframes offer-reveal {
+  from {
+    opacity: 0;
+    translate: 0 40px;
+  }
+}

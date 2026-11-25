@@ -3,12 +3,15 @@
 import { useEffect, useState } from "react";
 import { ArrowUpRightIcon, CheckIcon, ChevronDownIcon, MenuIcon } from "lucide-react";
 import Link from "next/link";
+import { PRESETS, savePalette } from "@/components/nano/ThemePicker";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Container } from "@/components/version2/site/Container";
 import { navGroups } from "@/lib/version2-content";
-import { palettes, type PaletteSlug } from "@/lib/palettes";
+import { palette1, palette3, type PaletteSlug } from "@/lib/palettes";
 import { Logo } from "./Logo";
+
+const themeMenus = { 1: palette1, 3: palette3 };
 
 function closeMenu(event: React.MouseEvent<HTMLAnchorElement>) {
   event.currentTarget.closest("details")?.removeAttribute("open");
@@ -18,7 +21,7 @@ function sectionHref(destination: { href: string; id?: string }) {
   return destination.id ? `#${destination.id}` : destination.href;
 }
 
-export function Header({ palette }: { palette: PaletteSlug }) {
+export function Header({ palette, version }: { palette: PaletteSlug; version: 1 | 3 }) {
   const [sectionHash, setSectionHash] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -29,12 +32,62 @@ export function Header({ palette }: { palette: PaletteSlug }) {
     return () => window.removeEventListener("hashchange", syncHash);
   }, []);
 
+  const isCurrent = (menu: 1 | 3, slug: PaletteSlug) => version === menu && palette === slug;
+
+  const renderThemeMenu = (menu: 1 | 3) => (
+    <details name="site-nav" className="group relative">
+      <summary onClick={() => setSectionHash(window.location.hash)} className="flex cursor-pointer list-none items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-mist/80 transition-colors hover:bg-elevated hover:text-mist focus-visible:outline-2 focus-visible:outline-lavender [&::-webkit-details-marker]:hidden">
+        <span className="size-3 rounded-full border border-line bg-lavender" aria-hidden="true" />
+        Palette{menu}
+        <ChevronDownIcon className="size-3.5 transition-transform group-open:rotate-180" aria-hidden="true" />
+      </summary>
+      <div className="absolute right-0 top-[calc(100%+0.75rem)] w-72 rounded-xl border border-line bg-panel p-3 shadow-2xl">
+        <p className="px-2 pb-2 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-gold">Explore colours</p>
+        {themeMenus[menu].map((option) => (
+          <Link key={option.slug} href={`${option.href}${sectionHash}`} onClick={closeMenu} aria-current={isCurrent(menu, option.slug) ? "page" : undefined} className="block rounded-lg px-2 py-2.5 transition-colors hover:bg-elevated focus-visible:outline-2 focus-visible:outline-lavender">
+            <span className="flex items-center justify-between gap-2 text-sm font-semibold text-mist">
+              {option.name}
+              {isCurrent(menu, option.slug) && <CheckIcon className="size-4 text-lavender" aria-hidden="true" />}
+            </span>
+            <span className="mt-1 block text-xs text-muted-foreground">{option.description}</span>
+            <span className="mt-1 block font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-lavender">
+              {option.font}
+            </span>
+            <span className="mt-2 flex gap-1" aria-hidden="true">
+              {option.swatches.map((swatch) => <span key={swatch.name} className="h-3 flex-1 rounded-sm border border-line" style={{ backgroundColor: swatch.hex }} />)}
+            </span>
+          </Link>
+        ))}
+      </div>
+    </details>
+  );
+
+  const renderMobileThemes = (menu: 1 | 3) => (
+    <div className="border-b border-line pb-4">
+      <p className="mb-2 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-gold">Palette{menu}</p>
+      {themeMenus[menu].map((option) => (
+        <Link key={option.slug} href={`${option.href}${sectionHash}`} onClick={() => setMobileOpen(false)} aria-current={isCurrent(menu, option.slug) ? "page" : undefined} className="grid grid-cols-[1fr_auto] gap-2 rounded-lg px-2 py-2 text-sm text-mist hover:bg-elevated focus-visible:outline-2 focus-visible:outline-lavender">
+          <span>
+            <span className="flex items-center gap-2">
+              <span className="size-3 rounded-full border border-line" style={{ backgroundColor: option.swatches[2].hex }} aria-hidden="true" />
+              {option.name}
+            </span>
+            <span className="mt-1 block pl-5 font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
+              {option.font}
+            </span>
+          </span>
+          {isCurrent(menu, option.slug) && <CheckIcon className="size-4 text-lavender" aria-hidden="true" />}
+        </Link>
+      ))}
+    </div>
+  );
+
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-graphite/95 backdrop-blur-xl">
       <Container className="flex h-16 items-center justify-between gap-6">
         <Logo />
 
-        <nav aria-label="Main" className="hidden items-center gap-1 lg:flex">
+        <nav aria-label="Main" className="hidden items-center gap-1 min-[72rem]:flex">
           {navGroups.map((group) => (
             <details key={group.label} name="site-nav" className="group relative">
               <summary className="flex cursor-pointer list-none items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-mist/80 transition-colors hover:bg-elevated hover:text-mist focus-visible:outline-2 focus-visible:outline-lavender [&::-webkit-details-marker]:hidden">
@@ -60,61 +113,52 @@ export function Header({ palette }: { palette: PaletteSlug }) {
               </div>
             </details>
           ))}
+          {renderThemeMenu(1)}
           <details name="site-nav" className="group relative">
             <summary onClick={() => setSectionHash(window.location.hash)} className="flex cursor-pointer list-none items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-mist/80 transition-colors hover:bg-elevated hover:text-mist focus-visible:outline-2 focus-visible:outline-lavender [&::-webkit-details-marker]:hidden">
-              <span className="size-3 rounded-full border border-line bg-lavender" aria-hidden="true" />
-              Palettes
+              <span className="size-3 rounded-full border border-line bg-gold" aria-hidden="true" />
+              Palette2
               <ChevronDownIcon className="size-3.5 transition-transform group-open:rotate-180" aria-hidden="true" />
             </summary>
             <div className="absolute right-0 top-[calc(100%+0.75rem)] w-72 rounded-xl border border-line bg-panel p-3 shadow-2xl">
-              <p className="px-2 pb-2 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-gold">Explore colours</p>
-              {palettes.map((option) => (
-                <Link key={option.slug} href={`${option.href}${sectionHash}`} onClick={closeMenu} aria-current={palette === option.slug ? "page" : undefined} className="block rounded-lg px-2 py-2.5 transition-colors hover:bg-elevated focus-visible:outline-2 focus-visible:outline-lavender">
-                  <span className="flex items-center justify-between gap-2 text-sm font-semibold text-mist">
-                    {option.name}
-                    {palette === option.slug && <CheckIcon className="size-4 text-lavender" aria-hidden="true" />}
-                  </span>
-                  <span className="mt-1 block text-xs text-muted-foreground">{option.description}</span>
-                  <span className="mt-1 block font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-lavender">
-                    {option.font}
-                  </span>
-                  <span className="mt-2 flex gap-1" aria-hidden="true">
-                    {option.swatches.map((swatch) => <span key={swatch.name} className="h-3 flex-1 rounded-sm border border-line" style={{ backgroundColor: swatch.hex }} />)}
-                  </span>
-                </Link>
-              ))}
+              <p className="px-2 pb-2 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-gold">Nanobots themes</p>
+              <div className="grid grid-cols-2 gap-2">
+                {PRESETS.map(({ name, palette: colors }) => (
+                  <Link key={name} href={`/palette2${sectionHash}`} onClick={(event) => { savePalette(colors); closeMenu(event); }} className="flex flex-col gap-2 rounded-lg border border-line p-2.5 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-lavender" style={{ backgroundColor: colors["--ground"], color: colors["--ink"] }}>
+                    <span className="flex gap-1" aria-hidden="true">
+                      {[colors["--violet"], colors["--ink"], colors["--ground-deep"]].map((hex, i) => <span key={i} className="size-3.5 rounded-full border border-black/10" style={{ backgroundColor: hex }} />)}
+                    </span>
+                    {name}
+                  </Link>
+                ))}
+              </div>
             </div>
           </details>
+          {renderThemeMenu(3)}
         </nav>
 
-        <Link href="#contact" className="hidden min-h-10 items-center gap-2 rounded-lg bg-lavender px-4 text-sm font-semibold text-graphite transition-colors hover:bg-[var(--lavender-hover)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lavender lg:inline-flex">
+        <Link href="#contact" className="hidden min-h-10 items-center gap-2 rounded-lg bg-lavender px-4 text-sm font-semibold text-graphite transition-colors hover:bg-[var(--lavender-hover)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lavender min-[72rem]:inline-flex">
           Contact us <ArrowUpRightIcon className="size-4" aria-hidden="true" />
         </Link>
 
         <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-          <SheetTrigger onClick={() => setSectionHash(window.location.hash)} render={<Button variant="ghost" size="icon" className="text-mist lg:hidden" aria-label="Open menu" />}>
+          <SheetTrigger onClick={() => setSectionHash(window.location.hash)} render={<Button variant="ghost" size="icon" className="text-mist min-[72rem]:hidden" aria-label="Open menu" />}>
             <MenuIcon />
           </SheetTrigger>
           <SheetContent side="right" className="overflow-y-auto border-line">
             <SheetTitle className="px-6 pt-6 font-heading text-lg text-mist">Menu</SheetTitle>
             <nav aria-label="Mobile" className="flex flex-col gap-4 px-6 pb-8">
+              {renderMobileThemes(1)}
               <div className="border-b border-line pb-4">
-                <p className="mb-2 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-gold">Colour palettes</p>
-                {palettes.map((option) => (
-                  <Link key={option.slug} href={`${option.href}${sectionHash}`} onClick={() => setMobileOpen(false)} aria-current={palette === option.slug ? "page" : undefined} className="grid grid-cols-[1fr_auto] gap-2 rounded-lg px-2 py-2 text-sm text-mist hover:bg-elevated focus-visible:outline-2 focus-visible:outline-lavender">
-                    <span>
-                      <span className="flex items-center gap-2">
-                        <span className="size-3 rounded-full border border-line" style={{ backgroundColor: option.swatches[2].hex }} aria-hidden="true" />
-                        {option.name}
-                      </span>
-                      <span className="mt-1 block pl-5 font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
-                        {option.font}
-                      </span>
-                    </span>
-                    {palette === option.slug && <CheckIcon className="size-4 text-lavender" aria-hidden="true" />}
+                <p className="mb-2 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-gold">Palette2</p>
+                {PRESETS.map(({ name, palette: colors }) => (
+                  <Link key={name} href={`/palette2${sectionHash}`} onClick={() => { savePalette(colors); setMobileOpen(false); }} className="flex items-center gap-2 rounded-lg px-2 py-2 text-sm text-mist hover:bg-elevated focus-visible:outline-2 focus-visible:outline-lavender">
+                    <span className="size-3 rounded-full border border-line" style={{ backgroundColor: colors["--violet"] }} aria-hidden="true" />
+                    {name}
                   </Link>
                 ))}
               </div>
+              {renderMobileThemes(3)}
               {navGroups.map((group) => (
                 <div key={group.label} className="border-b border-line pb-4">
                   <p className="mb-2 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-gold">{group.label}</p>

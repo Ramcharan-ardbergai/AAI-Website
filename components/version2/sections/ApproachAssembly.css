@@ -1,0 +1,71 @@
+/* Motion for the Palette3 "Our approach" stage. */
+.approach-radar {
+  background: conic-gradient(from 0deg, transparent 68%, color-mix(in srgb, var(--lavender) 35%, transparent));
+  opacity: 0;
+  transition: opacity 600ms;
+}
+
+.approach-stage[data-step="0"] .approach-radar {
+  opacity: 1;
+}
+
+.approach-stage[data-step="2"] .approach-core {
+  box-shadow: 0 0 0 10px color-mix(in srgb, var(--lavender) 12%, transparent), 0 0 70px color-mix(in srgb, var(--lavender) 55%, transparent);
+}
+
+/* The logo file used as a stencil, so the mark follows the theme colour. */
+.approach-mark {
+  mask: url("/logo.png") center / contain no-repeat;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .approach-radar {
+    animation: approach-spin 3.5s linear infinite;
+  }
+
+  .approach-stage[data-step="0"] .approach-piece {
+    animation: approach-drift 4s ease-in-out infinite;
+  }
+
+  .approach-dash {
+    animation: approach-dash 0.9s linear infinite;
+  }
+
+  .approach-current {
+    animation: approach-current 2.4s linear infinite;
+  }
+
+  .approach-timer {
+    animation: approach-timer 4.5s linear both;
+  }
+}
+
+@keyframes approach-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+@keyframes approach-drift {
+  50% {
+    translate: 6px -10px;
+  }
+}
+
+@keyframes approach-dash {
+  to {
+    stroke-dashoffset: 3.4;
+  }
+}
+
+@keyframes approach-current {
+  to {
+    stroke-dashoffset: -100;
+  }
+}
+
+@keyframes approach-timer {
+  from {
+    scale: 0 1;
+  }
+}

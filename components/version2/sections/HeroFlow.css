@@ -1,0 +1,139 @@
+/* Motion for the Palette3 hero. */
+.hero-flow-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--mist) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--mist) 7%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at 50% 30%, black 10%, transparent 70%);
+}
+
+/* Keeps the network quiet behind the headline and bright around it. */
+.hero-flow-network {
+  mask-image: radial-gradient(ellipse 48% 42% at 50% 44%, rgb(0 0 0 / 0.18) 30%, black 100%);
+}
+
+.hero-flow-shine {
+  background: linear-gradient(100deg, var(--lavender) 30%, var(--gold) 50%, var(--lavender) 70%);
+  background-size: 250% 100%;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-flow-halo {
+  background: conic-gradient(transparent, var(--lavender), transparent 40%, var(--gold) 60%, transparent 80%);
+  box-shadow: 0 0 60px -8px color-mix(in srgb, var(--lavender) 70%, transparent);
+}
+
+.hero-flow-cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 35%, rgb(255 255 255 / 0.35) 50%, transparent 65%);
+  transform: translateX(-100%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-flow-rise {
+    animation: hero-flow-rise 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  .hero-flow-shine {
+    animation: hero-flow-shine 4s linear infinite;
+  }
+
+  .hero-flow-halo {
+    animation: hero-flow-spin 4s linear infinite;
+  }
+
+  .hero-flow-timer {
+    animation: hero-flow-timer 4s linear both;
+  }
+
+  .hero-flow-aurora {
+    animation: hero-flow-drift 14s ease-in-out infinite alternate;
+  }
+
+  .hero-flow-aurora-late {
+    animation-delay: -7s;
+  }
+
+  .hero-flow-float {
+    animation: hero-flow-float 5s ease-in-out infinite;
+  }
+
+  .hero-flow-cta::after {
+    animation: hero-flow-sweep 3.5s ease-in-out 1.5s infinite;
+  }
+
+  /* Cards rise as they scroll into view, where the browser supports it. */
+  @supports (animation-timeline: view()) {
+    .hero-flow-card {
+      animation: hero-flow-reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 70%;
+    }
+  }
+}
+
+@keyframes hero-flow-rise {
+  from {
+    opacity: 0;
+    translate: 0 28px;
+    filter: blur(8px);
+  }
+}
+
+@keyframes hero-flow-timer {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes hero-flow-shine {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -150% 0;
+  }
+}
+
+@keyframes hero-flow-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+@keyframes hero-flow-drift {
+  to {
+    translate: 9rem 5rem;
+    scale: 1.2;
+  }
+}
+
+@keyframes hero-flow-float {
+  50% {
+    margin-top: -10px;
+    margin-bottom: 10px;
+  }
+}
+
+@keyframes hero-flow-sweep {
+  45%,
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* "translate" leaves the hover lift (also translate) free once revealed. */
+@keyframes hero-flow-reveal {
+  from {
+    opacity: 0;
+    scale: 0.92;
+  }
+}
+
+/* The logo file used as a stencil, so the mark follows the theme colour. */
+.hero-flow-mark {
+  mask: url("/logo.png") center / contain no-repeat;
+}

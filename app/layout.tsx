@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import {
   DM_Sans,
+  Geist_Mono,
   IBM_Plex_Sans,
   Instrument_Sans,
   Instrument_Serif,
   JetBrains_Mono,
   Manrope,
+  Schibsted_Grotesk,
 } from "next/font/google";
 import { ThemeFrame } from "@/components/site/ThemeFrame";
 import "./globals.css";
@@ -25,6 +27,9 @@ const ibmPlexSans = IBM_Plex_Sans({
 const dmSans = DM_Sans({ variable: "--font-dm-sans", subsets: ["latin"] });
 const manrope = Manrope({ variable: "--font-manrope", subsets: ["latin"] });
 const jetbrainsMono = JetBrains_Mono({ variable: "--font-jetbrains-mono", subsets: ["latin"] });
+// Palette2 (nanobots) fonts.
+const display = Schibsted_Grotesk({ variable: "--font-display", subsets: ["latin"] });
+const nanoMono = Geist_Mono({ variable: "--font-mono-nano", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "ardbergai - Where intelligence becomes impact",
@@ -37,7 +42,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${instrumentSans.variable} ${instrumentSerif.variable} ${ibmPlexSans.variable} ${dmSans.variable} ${manrope.variable} ${jetbrainsMono.variable}`}
+      className={`${instrumentSans.variable} ${instrumentSerif.variable} ${ibmPlexSans.variable} ${dmSans.variable} ${manrope.variable} ${jetbrainsMono.variable} ${display.variable} ${nanoMono.variable}`}
     >
       <body className="flex min-h-screen flex-col">
         <Suspense fallback={null}>
